@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#071412">
+<title>Nakhoda Rumah v5 — Lelaki Melayu Terakhir</title>
+<style>
+  :root{
+    --bg:#071412;--bg2:#0b1c19;--card:#102521;--card2:#15302b;
+    --gold:#e2b857;--gold-soft:rgba(226,184,87,0.16);
+    --green:#22c55e;--accent:#38bdf8;--warn:#f59e0b;--red:#ef4444;--purple:#a78bfa;
+    --text:#f4f1ea;--muted:#9cb3ac;--border:#1f3d37;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+  body{background:radial-gradient(circle at top,#102c26 0%,var(--bg) 55%);color:var(--text);padding-bottom:88px;line-height:1.5;min-height:100vh}
+  header{padding:14px 16px;background:rgba(7,20,18,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center}
+  .brand h1{font-size:1.05rem;color:var(--gold);letter-spacing:.5px;font-weight:800}
+  .brand p{font-size:.72rem;color:var(--muted)}
+  .hdr-badges{display:flex;gap:6px;align-items:center}
+  .badge{background:var(--card2);border:1px solid var(--border);color:var(--gold);font-size:.74rem;font-weight:700;padding:4px 9px;border-radius:99px}
+  .badge.fire{color:#fb923c;border-color:rgba(251,146,60,0.35)}
+  .container{max-width:540px;margin:0 auto;padding:13px}
+  .tab-content{display:none}.tab-content.active{display:block;animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .card{background:linear-gradient(180deg,var(--card) 0%,var(--bg2) 100%);border-radius:16px;padding:15px;margin-bottom:13px;border:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,0.22)}
+  .card.gold-border{border-color:rgba(226,184,87,0.45)}
+  .card h2{font-size:.98rem;margin-bottom:6px;color:var(--gold);display:flex;align-items:center;gap:6px}
+  .card h3{font-size:.88rem;color:#e7e2d5;margin:8px 0 4px}
+  .muted{color:var(--muted);font-size:.82rem}
+  .label{display:block;font-size:.77rem;font-weight:700;color:var(--gold);margin-top:10px}
+  .btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;font-size:.9rem;cursor:pointer;margin-top:8px;transition:transform .1s,opacity .15s}
+  .btn:active{transform:scale(0.98)}
+  .btn-gold{background:linear-gradient(135deg,#e6c166,#c89632);color:#141006}
+  .btn-green{background:var(--green);color:#042411}
+  .btn-primary{background:var(--accent);color:#061724}
+  .btn-warn{background:var(--warn);color:#1c1304}
+  .btn-purple{background:var(--purple);color:#1a1038}
+  .btn-ghost{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+  .btn-sm{padding:7px 11px;font-size:.78rem;width:auto;margin-top:6px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .row>*{flex:1}
+  /* Subtabs */
+  .subtabs{display:flex;gap:6px;margin-bottom:12px;background:var(--bg2);padding:5px;border-radius:12px;border:1px solid var(--border)}
+  .subtabs button{flex:1;padding:8px 6px;border:none;border-radius:8px;background:transparent;color:var(--muted);font-size:.78rem;font-weight:700;cursor:pointer}
+  .subtabs button.active{background:var(--card2);color:var(--gold);border:1px solid rgba(226,184,87,0.3)}
+  .sub-panel{display:none}.sub-panel.active{display:block;animation:fade .18s ease}
+  /* Hero / Rank */
+  .hero{background:linear-gradient(135deg,#13332b 0%,#0b1e1a 60%,#1c2214 100%);border:1px solid rgba(226,184,87,0.4);border-radius:18px;padding:16px;margin-bottom:13px}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .rank-pill{display:inline-block;background:var(--gold-soft);color:var(--gold);border:1px solid rgba(226,184,87,0.4);padding:3px 10px;border-radius:99px;font-size:.73rem;font-weight:700;margin-top:4px}
+  .bar-bg{height:9px;background:#081614;border-radius:99px;overflow:hidden;margin:8px 0;border:1px solid var(--border)}
+  .bar-fill{height:100%;background:linear-gradient(90deg,#c89632,var(--gold),var(--green));transition:width .35s ease}
+  /* 7-day chart */
+  .hist-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px;align-items:end;height:56px}
+  .hist-col{display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+  .hist-bar{width:100%;max-width:26px;background:var(--card2);border-radius:6px 6px 2px 2px;min-height:6px;transition:height .3s}
+  .hist-bar.good{background:linear-gradient(180deg,var(--gold),var(--green))}
+  .hist-lbl{font-size:.66rem;color:var(--muted)}
+  /* Mood & Chips */
+  .mood-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}
+  .mood-btn{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:9px 4px;color:var(--text);font-size:.75rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+  .mood-btn span{font-size:1.25rem}
+  .mood-btn.active{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+  .chip-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .chip{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:10px 9px;border-radius:10px;font-size:.8rem;font-weight:600;cursor:pointer;text-align:left}
+  .chip.active{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+  /* Boxes */
+  .box{background:var(--bg2);border-left:4px solid var(--gold);padding:11px 12px;border-radius:9px;margin:8px 0;font-size:.85rem}
+  .box.green{border-left-color:var(--green)}
+  .box.purple{border-left-color:var(--purple)}
+  .box.red{border-left-color:var(--red)}
+  /* Breathing & Timer */
+  .circle{width:146px;height:146px;border-radius:50%;border:4px solid var(--gold);margin:16px auto;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:.96rem;transition:transform 4s ease-in-out,border-color .5s,box-shadow 4s;box-shadow:0 0 22px rgba(226,184,87,0.12)}
+  .circle.grow{transform:scale(1.2);border-color:var(--green);box-shadow:0 0 36px rgba(34,197,94,0.28)}
+  .timer-display{font-size:2.7rem;font-weight:800;text-align:center;margin:8px 0;color:var(--gold);letter-spacing:2px}
+  /* Lists */
+  .task-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+  .task-item:last-child{border-bottom:none}
+  .task-item input[type="checkbox"]{width:21px;height:21px;accent-color:var(--gold);flex-shrink:0}
+  .task-item.done span{text-decoration:line-through;color:var(--muted)}
+  .task-item span{flex:1;font-size:.88rem}
+  .del-btn{background:none;border:none;color:var(--red);font-size:1rem;cursor:pointer;padding:4px 8px}
+  input[type="text"],input[type="number"],textarea,select{width:100%;padding:10px 11px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:.89rem;margin-top:6px}
+  .skill-card,.script-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:10px}
+  .skill-head{display:flex;justify-content:space-between;align-items:center;font-size:.86rem;font-weight:700}
+  .script-tag{font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:4px;letter-spacing:.4px}
+  /* Finance */
+  .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .fin-stat{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:10px}
+  .fin-stat small{color:var(--muted);font-size:.72rem;display:block}
+  .fin-stat b{font-size:1.05rem;color:var(--gold)}
+  /* Overlay */
+  #phoneOverlay{position:fixed;inset:0;background:radial-gradient(circle at center,#122923 0%,#030a09 75%);z-index:99;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+  #phoneOverlay.show{display:flex}
+  #phoneTimer{font-size:4rem;font-weight:800;color:var(--gold);margin:14px 0;letter-spacing:3px}
+  /* Toast */
+  #toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:var(--gold);color:#141006;padding:8px 16px;border-radius:99px;font-size:.82rem;font-weight:700;z-index:120;display:none;box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+  /* Nav */
+  nav{position:fixed;bottom:0;left:0;right:0;background:rgba(7,20,18,0.96);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:7px 2px 9px;z-index:30}
+  nav button{background:none;border:none;color:var(--muted);font-size:.67rem;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 5px}
+  nav button.active{color:var(--gold)}
+  nav button span{font-size:1.18rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>NAKHODA RUMAH</h1>
+    <p>Edisi Lelaki Melayu Terakhir</p>
+  </div>
+  <div class="hdr-badges">
+    <div id="streakBadge" class="badge fire">🔥 0 Hari</div>
+    <div id="xpBadge" class="badge">0 XP</div>
+  </div>
+</header>
+
+<div id="toast"></div>
+
+<div class="container">
+
+  <!-- ==================== TAB 1: UTAMA ==================== -->
+  <section id="tab-utama" class="tab-content active">
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div id="greetText" style="font-size:1.05rem;font-weight:800;color:var(--text)">Selamat Datang, Nakhoda</div>
+          <div id="rankPill" class="rank-pill">Pangkat: Pelatih</div>
+        </div>
+        <div style="text-align:right">
+          <div id="todayPct" style="font-size:1.35rem;font-weight:800;color:var(--gold)">0%</div>
+          <div class="muted" style="font-size:.7rem">Tugas Hari Ini</div>
+        </div>
+      </div>
+      <div class="bar-bg"><div id="rankBar" class="bar-fill" style="width:0%"></div></div>
+      <div id="rankNext" class="muted" style="font-size:.74rem"></div>
+    </div>
+
+    <div class="card gold-border">
+      <h2>⚡ Tindakan Pantas Sekarang</h2>
+      <div class="row">
+        <button class="btn btn-gold" onclick="startPhoneDown()">📵 Letak Telefon 15m</button>
+        <button class="btn btn-ghost" onclick="switchTab('tenang');document.getElementById('dumpInput').focus()">🧠 Buang Serabut</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🌡️ Apa Rasa Hati Kau Sekarang?</h2>
+      <p class="muted">Tekan satu supaya app bantu kau bertindak ikut tenaga sebenar.</p>
+      <div class="mood-grid">
+        <button class="mood-btn" onclick="setMood('tenang',this)"><span>🌿</span>Tenang</button>
+        <button class="mood-btn" onclick="setMood('penat',this)"><span>🔋</span>Penat</button>
+        <button class="mood-btn" onclick="setMood('serabut',this)"><span>🌪️</span>Serabut</button>
+        <button class="mood-btn" onclick="setMood('tegang',this)"><span>🔥</span>Tegang</button>
+      </div>
+      <div id="moodReply" class="box green" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Misi 3 Serangkai Hari Ini</h2>
+      <p class="muted">Buat 3 perkara asas ni saja setiap hari—rumah terjaga, isteri rasa dihargai, masa depan bergerak.</p>
+      <div id="dailyQuestBox" style="margin-top:8px"></div>
+    </div>
+
+    <div class="card">
+      <h2>📜 Hikmah & Adab Hari Ini</h2>
+      <div id="hikmahBox" class="box"></div>
+      <button class="btn btn-ghost btn-sm" onclick="nextHikmah()">Tukar Hikmah Lain</button>
+    </div>
+
+    <div class="card">
+      <h2>📊 Konsistensi 7 Hari Terakhir</h2>
+      <p class="muted">Tugas diset semula automatik setiap tengah malam sambil menyimpan rekod usaha kau.</p>
+      <div id="histBars" class="hist-bars"></div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 2: TENANG ==================== -->
+  <section id="tab-tenang" class="tab-content">
+    <div class="card gold-border">
+      <h2>🌧️ Bunyi Latar Tenang (100% Offline)</h2>
+      <p class="muted">Pasang bunyi alam lembut masa tarik nafas, kemas rumah, atau tenangkan fikiran malam.</p>
+      <div class="row" style="margin-top:8px">
+        <button id="snd-rain" class="btn btn-ghost btn-sm" onclick="toggleAmbient('rain')">🌧️ Hujan</button>
+        <button id="snd-wave" class="btn btn-ghost btn-sm" onclick="toggleAmbient('wave')">🌊 Ombak</button>
+        <button id="snd-wind" class="btn btn-ghost btn-sm" onclick="toggleAmbient('wind')">🌬️ Angin</button>
+        <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="stopAmbient()">⏹️ Tutup</button>
+      </div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
+        <span class="muted" style="font-size:.76rem">Kelantangan:</span>
+        <input type="range" id="ambVol" min="0.02" max="0.5" step="0.02" value="0.18" oninput="updateAmbVol(this.value)" style="flex:1;accent-color:var(--gold)">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🌬️ Pernafasan Nakhoda (4-4-4-4)</h2>
+      <p class="muted">Redakan marah, rasa bersalah, atau serabut dalam 1 minit.</p>
+      <div id="breathCircle" class="circle">Tekan Mula</div>
+      <button id="breathBtn" class="btn btn-gold" onclick="toggleBreath()">Mula Pernafasan</button>
+    </div>
+
+    <div class="card">
+      <h2>🧠 Brain Dump (Keluarkan Serabut Kepala)</h2>
+      <p class="muted">Muntahkan semua benda yang buat kepala penuh. Kemudian pilih <b>SATU SAHAJA</b> jadi Fokus Utama—yang lain disorokkan sementara.</p>
+      <div id="activeFocusWrap" style="display:none" class="box green">
+        <div style="font-size:.74rem;font-weight:700;color:var(--green)">🎯 FOKUS TUNGGAL SEKARANG:</div>
+        <div id="activeFocusText" style="font-weight:700;font-size:.95rem;margin:4px 0"></div>
+        <div class="row">
+          <button class="btn btn-green btn-sm" onclick="finishFocusItem()">Selesai (+15 XP)</button>
+          <button class="btn btn-ghost btn-sm" onclick="clearFocusItem()">Tukar Fokus</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <input type="text" id="dumpInput" placeholder="Tulis apa yang serabut di kepala...">
+        <button class="btn btn-gold" style="flex:0 0 auto;width:auto;padding:0 15px" onclick="addDump()">+</button>
+      </div>
+      <div id="dumpList" style="margin-top:8px"></div>
+    </div>
+
+    <div class="card">
+      <h2>🚨 Protokol SOS (Bila Hampir Marah / Nak Membisu)</h2>
+      <div class="box red">
+        <b>1. Berhenti 10 Saat:</b> Jangan balas dengan ego dan jangan terus lari masuk bilik.<br>
+        <b>2. Lembutkan Nada:</b> Lelaki Melayu Terakhir tak perlu menjerit untuk dihormati.<br>
+        <b>3. Sebut 1 Ayat Jujur:</b> <i>"Kepala abang tengah penuh. Bagi abang 10 minit tenangkan diri, lepas tu kita bincang elok-elok."</i>
+      </div>
+      <button class="btn btn-ghost" onclick="switchTab('kasih')">Buka Skrip Buka Mulut</button>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 3: TUGAS & ENJIN ==================== -->
+  <section id="tab-tugas" class="tab-content">
+    <div class="subtabs">
+      <button class="active" onclick="subTab('tugas','harian',this)">✅ Harian</button>
+      <button onclick="subTab('tugas','enjin',this)">⚙️ Enjin Skill</button>
+      <button onclick="subTab('tugas','adab',this)">🗡️ Kod Adab</button>
+    </div>
+
+    <!-- SUB 1: HARIAN -->
+    <div id="tugas-harian" class="sub-panel active">
+      <div class="card">
+        <h2>⏱️ Pemasa Fokus Anti-Santai</h2>
+        <input type="text" id="focusTask" placeholder="1 kerja sekarang (cth: Basuh pinggan / lipat baju)...">
+        <div id="timerDisplay" class="timer-display">05:00</div>
+        <div class="row">
+          <button class="btn btn-ghost btn-sm" onclick="setTimer(5)">5 Minit</button>
+          <button class="btn btn-ghost btn-sm" onclick="setTimer(15)">15 Minit</button>
+          <button class="btn btn-ghost btn-sm" onclick="setTimer(25)">25 Minit</button>
+        </div>
+        <div class="row">
+          <button id="startTimerBtn" class="btn btn-gold" onclick="toggleTimer()">Mula Buat</button>
+          <button class="btn btn-ghost" onclick="resetTimer()">Reset</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>✅ Tugas Harian Anti-Messy</h2>
+        <p class="muted">Selesaikan 2 wilayah tetap kau setiap hari tanpa perlu diingatkan.</p>
+        <div id="taskList" style="margin-top:6px"></div>
+        <div class="row" style="margin-top:8px">
+          <input type="text" id="newTaskInput" placeholder="Tambah tugas tetap sendiri...">
+          <button class="btn btn-gold" style="flex:0 0 auto;width:auto;padding:0 16px" onclick="addTask()">+</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🏆 Log Kemenangan Kecil</h2>
+        <div class="row">
+          <input type="text" id="winInput" placeholder="Cth: Sinki kosong sebelum tidur...">
+          <button class="btn btn-green" style="flex:0 0 auto;width:auto;padding:0 14px" onclick="addWin()">Simpan</button>
+        </div>
+        <div id="winList" style="margin-top:8px"></div>
+      </div>
+    </div>
+
+    <!-- SUB 2: ENJIN SKILL -->
+    <div id="tugas-enjin" class="sub-panel">
+      <div class="card">
+        <h2>⚙️ Enjin Kemahiran (8 Teras)</h2>
+        <p class="muted">Latihan berubah mengikut Level (Lv.1 → Lv.3). Terhad <b>1x sehari</b> bagi setiap kemahiran supaya disiplin betul-betul terbina.</p>
+        <div id="skillList"></div>
+      </div>
+    </div>
+
+    <!-- SUB 3: KOD ADAB LELAKI MELAYU TERAKHIR -->
+    <div id="tugas-adab" class="sub-panel">
+      <div class="card gold-border">
+        <h2>🗡️ Kod Adab "Lelaki Melayu Terakhir"</h2>
+        <p class="muted">Bukan sekadar gelaran—ini piawaian akhlak yang kita latih setiap hari di dalam rumah sendiri.</p>
+        <div class="box">
+          <b>1. Lembut Bicara, Tegas Pendirian:</b> Tak tinggi suara pada isteri, tapi tegas menjaga disiplin dan tanggungjawab sendiri.<br><br>
+          <b>2. Buat Dulu, Baru Cakap:</b> Nampak pinggan, sampah, atau lantai bersepah—terus bergerak tanpa tunggu disuruh.<br><br>
+          <b>3. Jadi Teduhan, Bukan Beban:</b> Bila rumah rasa tegang, kaulah orang pertama yang bawa tenang dan buka mulut dengan ihsan.<br><br>
+          <b>4. Kemas Diri & Kemas Rumah:</b> Cara kita jaga ruang kecil di rumah mencerminkan cara kita jaga masa depan.<br><br>
+          <b>5. Ingat Budi & Bersyukur:</b> Sentiasa nampak penat lelah isteri dan ucapkan terima kasih dengan mata memandang wajahnya.
+        </div>
+        <button id="ikrarBtn" class="btn btn-gold" onclick="signIkrar()">🤝 Lafaz & Sahkan Ikrar Hari Ini (+15 XP)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 4: KASIH (ISTERI) ==================== -->
+  <section id="tab-kasih" class="tab-content">
+    <div class="subtabs">
+      <button class="active" onclick="subTab('kasih','skrip',this)">💬 Skrip</button>
+      <button onclick="subTab('kasih','semak',this)">🤝 Semak 10m</button>
+      <button onclick="subTab('kasih','budi',this)">🌹 Budi</button>
+    </div>
+
+    <!-- SUB 1: SKRIP -->
+    <div id="kasih-skrip" class="sub-panel active">
+      <div class="card">
+        <h2>💬 Skrip Buka Mulut (Anti-Diam)</h2>
+        <p class="muted">Jangan biar diam jadi dinding. Pilih satu ayat jujur—cakap terus atau salin ke WhatsApp dulu.</p>
+        <div id="scriptList"></div>
+      </div>
+      <div class="card">
+        <h2>Tambah Ayat Sendiri</h2>
+        <input type="text" id="customTag" placeholder="Situasi (cth: Pujuk isteri)">
+        <textarea id="customScript" rows="2" placeholder="Tulis ayat yang ikhlas dari hati kau..."></textarea>
+        <button class="btn btn-gold" onclick="addCustomScript()">Simpan Skrip</button>
+      </div>
+    </div>
+
+    <!-- SUB 2: SEMAK MINGGUAN 10 MINIT -->
+    <div id="kasih-semak" class="sub-panel">
+      <div class="card gold-border">
+        <h2>🤝 Semak Mingguan Bersama Isteri (10 Minit)</h2>
+        <p class="muted">Duduk tenang berdua seminggu sekali (letak telefon tepi). Dengar dulu tanpa membela diri, kemudian catat ringkas.</p>
+        <div class="row" style="margin:8px 0">
+          <button class="btn btn-gold btn-sm" onclick="startCheckinTimer()">⏱️ Mula Pemasa 10 Minit</button>
+          <span id="ciTimer" style="align-self:center;font-weight:800;color:var(--gold);text-align:right">10:00</span>
+        </div>
+        <label class="label">1. Apa benda paling buat isteri penat minggu ni?</label>
+        <input type="text" id="ci1" placeholder="Dengar & catat ringkas...">
+        <label class="label">2. Apa 1 perkara baik minggu ni yang kita syukuri?</label>
+        <input type="text" id="ci2" placeholder="Cth: Rumah makin kemas, sempat makan bersama...">
+        <label class="label">3. Apa 1 perkara abang boleh perbaiki minggu depan?</label>
+        <input type="text" id="ci3" placeholder="Pilih 1 benda realistik saja...">
+        <label class="label">4. Urusan rumah / kewangan / masa berdua minggu depan:</label>
+        <input type="text" id="ci4" placeholder="Cth: Beli barang dapur Sabtu pagi, keluar makan malam Ahad">
+        <button class="btn btn-green" onclick="saveCheckin()">Simpan Rekod Semak Mingguan (+25 XP)</button>
+      </div>
+      <div class="card">
+        <h2>🗂️ Sejarah Semak Mingguan</h2>
+        <div id="ciHistory"></div>
+      </div>
+    </div>
+
+    <!-- SUB 3: BUDI & ROMANTIK -->
+    <div id="kasih-budi" class="sub-panel">
+      <div class="card gold-border">
+        <h2>🌹 Sentuhan Budi Hari Ini</h2>
+        <p class="muted">Perkara kecil yang tulus buat isteri rasa disayangi dan tak berjuang seorang diri.</p>
+        <div id="budiBox" class="box" style="font-size:.95rem;font-weight:600;padding:15px"></div>
+        <div class="row">
+          <button class="btn btn-ghost" onclick="nextBudi()">🎲 Idea Lain</button>
+          <button class="btn btn-gold" onclick="doneBudi()">✅ Dah Buat (+15 XP)</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>💡 3 Rahsia Buat Isteri Rasa Selamat</h2>
+        <p class="muted">
+          <b>1. Kehadiran Penuh:</b> Bila dia bercakap, letak telefon terbalik dan pandang matanya.<br><br>
+          <b>2. Tutup "Loop" Kerja:</b> Kalau jemur baju, angkat sekali. Kalau masak/makan, kemas meja sampai bersih.<br><br>
+          <b>3. Puji Secara Spesifik:</b> Bukan sekadar "terima kasih", tapi <i>"Terima kasih awak, sedap sangat lauk hari ni, abang nampak awak penat tapi tetap masakkan."</i>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 5: ARAH (MASA DEPAN & KEWANGAN) ==================== -->
+  <section id="tab-arah" class="tab-content">
+    <div class="subtabs">
+      <button class="active" onclick="subTab('arah','kompas',this)">🔭 Masa Depan</button>
+      <button onclick="subTab('arah','wang',this)">💰 Kewangan</button>
+      <button onclick="subTab('arah','adaptif',this)">🧠 Adaptif</button>
+    </div>
+
+    <!-- SUB 1: KOMPAS MASA DEPAN -->
+    <div id="arah-kompas" class="sub-panel active">
+      <div class="card gold-border">
+        <h2>🔭 Kompas Masa Depan Berpandu</h2>
+        <p class="muted">Tak tahu nak tulis apa? Tekan salah satu <b>Templat Pantas</b> di bawah, kemudian ubah ikut situasi kau:</p>
+        <div class="chip-grid">
+          <button class="chip" onclick="applyGoalTpl('rumah')">🏠 Rumah Teratur</button>
+          <button class="chip" onclick="applyGoalTpl('kasih')">❤️ Pulih Rumahtangga</button>
+          <button class="chip" onclick="applyGoalTpl('rezeki')">💼 Rezeki & Kerjaya</button>
+          <button class="chip" onclick="applyGoalTpl('diri')">💪 Disiplin Diri</button>
+        </div>
+        <label class="label">Fokus 30 Hari Ini (1 Matlamat Utama):</label>
+        <input type="text" id="goal30" placeholder="Tulis 1 fokus utama bulan ini...">
+        <label class="label">Arah 1 Tahun (Masa Depan Keluarga):</label>
+        <input type="text" id="goal1y" placeholder="Ke mana kau nak bawa keluarga tahun depan?">
+        <label class="label">Apa Yang Nak Dibuat Minggu Ini (Max 3 Perkara):</label>
+        <textarea id="goalWeek" rows="3" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea>
+        <div class="row">
+          <button class="btn btn-gold" onclick="saveFuturePlan()">Simpan Pelan</button>
+          <button class="btn btn-ghost" onclick="sendGoalToTask()">➕ Hantar ke Tugas</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>💾 Backup & Restore Data</h2>
+        <p class="muted">Semua rekod disimpan dalam telefon. Salin backup JSON sekali-sekala sebagai simpanan selamat.</p>
+        <div class="row">
+          <button class="btn btn-ghost" onclick="exportData()">Salin Backup</button>
+          <button class="btn btn-ghost" onclick="importData()">Restore Backup</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB 2: KEWANGAN RINGKAS -->
+    <div id="arah-wang" class="sub-panel">
+      <div class="card gold-border">
+        <h2>💰 Bajet & Tabung Keluarga</h2>
+        <div class="fin-grid">
+          <div class="fin-stat"><small>Baki Bajet Bulan Ini</small><b id="finBal">RM 0</b></div>
+          <div class="fin-stat"><small>Tabung Kecemasan</small><b id="finSav" style="color:var(--green)">RM 0</b></div>
+        </div>
+        <div class="bar-bg"><div id="savBar" class="bar-fill" style="width:0%"></div></div>
+        <div id="savLbl" class="muted" style="font-size:.74rem;margin-bottom:8px">Sasaran Tabung: RM 3,000</div>
+        <div class="row">
+          <div>
+            <label class="label" style="margin-top:4px">Bajet Bulanan (RM)</label>
+            <input type="number" id="finBudgetInp" placeholder="Cth: 2500" onchange="updateFinSettings()">
+          </div>
+          <div>
+            <label class="label" style="margin-top:4px">Sasaran Tabung (RM)</label>
+            <input type="number" id="finTargetInp" placeholder="Cth: 3000" onchange="updateFinSettings()">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>➕ Catat Belanja / Simpanan</h2>
+        <div class="row">
+          <select id="txType">
+            <option value="exp">Belanja (-)</option>
+            <option value="sav">Simpan Tabung (+)</option>
+          </select>
+          <select id="txCat">
+            <option>Dapur & Makan</option>
+            <option>Nafkah & Isteri</option>
+            <option>Bil & Rumah</option>
+            <option>Simpanan</option>
+            <option>Lain-lain</option>
+          </select>
+        </div>
+        <div class="row">
+          <input type="text" id="txNote" placeholder="Catatan ringkas...">
+          <input type="number" id="txAmt" placeholder="RM" style="max-width:110px">
+        </div>
+        <button class="btn btn-gold" onclick="addTx()">Rekod Transaksi</button>
+        <div id="txList" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <!-- SUB 3: ADAPTIVE THINKING -->
+    <div id="arah-adaptif" class="sub-panel">
+      <div class="card">
+        <h2>🧠 Enjin Pemikiran Adaptif (Plan B)</h2>
+        <p class="muted">Bila hidup tak ikut pelan dan otak rasa kaku, pilih keadaan sekarang untuk tukar ke <b>Pelan B Mikro</b>:</p>
+        <div class="chip-grid">
+          <button class="chip" onclick="runAdaptive('penat',this)">🔋 Penat Balik Kerja</button>
+          <button class="chip" onclick="runAdaptive('messy',this)">🌪️ Rumah Terlalu Messy</button>
+          <button class="chip" onclick="runAdaptive('tegang',this)">🧊 Isteri Dingin / Tegur</button>
+          <button class="chip" onclick="runAdaptive('telefon',this)">📱 Dah Hanyut Telefon</button>
+          <button class="chip" onclick="runAdaptive('kabur',this)">🧭 Tak Tahu Nak Buat Apa</button>
+          <button class="chip" onclick="runAdaptive('malas',this)">🛋️ Terlalu Santai / Pasif</button>
+        </div>
+        <div id="adaptiveResult" style="display:none;margin-top:12px">
+          <div class="box purple">
+            <div style="font-weight:700;color:var(--purple);margin-bottom:4px">1. Reframe Adaptif:</div>
+            <div id="adReframe"></div>
+          </div>
+          <div class="box green">
+            <div style="font-weight:700;color:var(--green);margin-bottom:4px">2. Pelan B Mikro (2–5 Minit):</div>
+            <div id="adPlan"></div>
+          </div>
+          <button id="adActionBtn" class="btn btn-purple" onclick="doAdaptiveAction()">Buat Tindakan Sekarang</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- OVERLAY MOD LETAK TELEFON -->
+<div id="phoneOverlay">
+  <div style="font-size:2.8rem">📵</div>
+  <h2 style="color:var(--gold);margin-top:8px;font-size:1.25rem">LETAK TELEFON SEKARANG</h2>
+  <p class="muted" style="max-width:320px;margin-top:6px">Jangan duduk dulu. Cas telefon jauh dari tangan dan bergerak buat 1–2 kerja rumah depan mata sampai loceng berbunyi.</p>
+  <div id="phoneTimer">15:00</div>
+  <div class="muted" style="font-size:.76rem;margin-bottom:16px">Kiraan masa kekal tepat walaupun skrin dipadam.</div>
+  <button class="btn btn-ghost" style="max-width:240px" onclick="stopPhoneDown()">Tamat Awal / Dah Siap</button>
+</div>
+
+<nav>
+  <button id="nav-utama" class="active" onclick="switchTab('utama',this)"><span>🏠</span>Utama</button>
+  <button id="nav-tenang" onclick="switchTab('tenang',this)"><span>🌿</span>Tenang</button>
+  <button id="nav-tugas" onclick="switchTab('tugas',this)"><span>⚔️</span>Tugas</button>
+  <button id="nav-kasih" onclick="switchTab('kasih',this)"><span>❤️</span>Kasih</button>
+  <button id="nav-arah" onclick="switchTab('arah',this)"><span>🔭</span>Arah</button>
+</nav>
+
+<script>
+// ==================== UTILITI & STATE BERSATU ====================
+const STORE_KEY = 'nakhoda_v5_state';
+const todayKey = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(window._toastT);
+  window._toastT = setTimeout(() => t.style.display = 'none', 2200);
+}
+
+function copyText(text, okMsg){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showToast(okMsg || 'Disalin ✓')).catch(() => fallbackCopy(text, okMsg));
+  } else { fallbackCopy(text, okMsg); }
+}
+function fallbackCopy(text, okMsg){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast(okMsg || 'Disalin ✓'); } catch(e) { alert('Gagal menyalin automatik.'); }
+  document.body.removeChild(ta);
+}
+
+const DEFAULT_SKILLS = [
+  {name:"1. Inisiatif Tanpa Disuruh", xp:0, last:"", drills:["Nampak 1 benda bersepah & terus kemas tanpa disuruh.","Selesaikan 2 kerja rumah sebelum isteri sempat menyebutnya.","Imbas seluruh rumah setiap malam & tutup semua 'loop' kerja."]},
+  {name:"2. Komunikasi Anti-Diam", xp:0, last:"", drills:["Buka mulut cakap 1 ayat jujur atau tanya khabar isteri.","Bila rasa serabut, beritahu isteri elok-elok tanpa membisu.","Duduk berbual 10 minit tanpa telefon dan dengar penuh empati."]},
+  {name:"3. Kawalan Diri & Telefon", xp:0, last:"", drills:["Letak telefon 15 minit sejurus sampai rumah.","Tiada telefon di meja makan dan 30 minit sebelum tidur.","Guna telefon untuk bina hidup/ilmu, bukan lari dari masalah."]},
+  {name:"4. Pengurusan 2 Wilayah Rumah", xp:0, last:"", drills:["Pastikan sinki kosong & sampah dibuang hari ini.","Tambah 1 kawasan kemas harian (meja makan / ruang tamu).","Pastikan rumah masuk tidur dalam keadaan kemas & tenang."]},
+  {name:"5. Pemikiran Adaptif (Plan B)", xp:0, last:"", drills:["Bila penat, buat Pelan B 5 minit—jangan berhenti 0%.","Tukar 1 rasa bersalah hari ini kepada 1 tindakan kecil.","Kekal tenang bila jadual lari & susun semula pelan dengan cepat."]},
+  {name:"6. Berfikir Untuk Masa Depan", xp:0, last:"", drills:["Tulis atau semak matlamat 30 hari keluarga hari ini.","Pecahkan 1 impian tahunan kepada 1 tindakan minggu ini.","Bincang hala tuju keluarga 10 minit bersama isteri."]},
+  {name:"7. Keutamaan (Apa Nak Dibuat)", xp:0, last:"", drills:["Pilih 1 benda paling penting hari ini & siapkan dulu.","Buang serabut di Brain Dump & kunci 1 fokus tunggal.","Rancang 3 keutamaan esok sebelum tidur malam ini."]},
+  {name:"8. Disiplin Masa & Kewangan", xp:0, last:"", drills:["Catat semua belanja hari ini dalam tab Kewangan.","Asingkan sedikit simpanan kecemasan walaupun RM5–RM10.","Semak baki bajet mingguan & elak belanja ikut emosi."]}
+];
+
+const DEFAULT_TASKS = [
+  {text:"[Wilayah 1] Sinki kosong & pinggan dibasuh sebelum tidur", done:false},
+  {text:"[Wilayah 2] Buang sampah sebelum penuh", done:false},
+  {text:"15 minit letak telefon & kemas 1 sudut rumah", done:false},
+  {text:"Tanya isteri apa yang boleh abang bantu malam ni", done:false},
+  {text:"Tulis 1 benda paling penting untuk dibuat esok", done:false}
+];
+
+const DEFAULT_SCRIPTS = [
+  {tag:"Bila Isteri Rasa Sorang-Sorang", text:"Abang dengar apa awak cakap. Abang sedar abang terlalu pasif dan banyak diam. Minta maaf buat awak rasa sorang-sorang. Mulai hari ni abang ambil alih sinki dan sampah, awak tak payah fikir dua benda ni."},
+  {tag:"Bila Serabut & Hampir Nak Membisu", text:"Abang bukan tak peduli. Kepala abang tengah penuh sekarang. Bagi abang 10 minit tenangkan diri dulu, lepas tu kita sambung cakap elok-elok."},
+  {tag:"Ajak Semak Mingguan (10 Minit)", text:"Malam ni atau hujung minggu nanti, jom kita duduk 10 minit tanpa telefon. Abang nak dengar apa yang buat awak penat minggu ni dan apa benda penting kita nak rancang sama-sama."},
+  {tag:"Bila Terleka Pegang Telefon", text:"Maaf, abang terhanyut pegang telefon tadi. Abang letak telefon sekarang, apa benda paling penting kita nak selesaikan dulu?"},
+  {tag:"Minta Maaf Tanpa Ego", text:"Betul cakap awak, tadi memang salah abang sebab tangguh. Abang tak nak bagi alasan, abang pergi buat sekarang."},
+  {tag:"Hargai Penat Lelah Isteri", text:"Terima kasih banyak awak sebab selalu uruskan rumah dan keluarga kita. Abang nampak penat awak, malam ni biar abang pula yang uruskan kerja selebihnya."}
+];
+
+function createDefaultState(){
+  return {
+    lastDate: todayKey(),
+    xp: 0,
+    streak: 0,
+    mood: "",
+    ikrarDate: "",
+    history: [], // [{date, pct}]
+    tasks: JSON.parse(JSON.stringify(DEFAULT_TASKS)),
+    skills: JSON.parse(JSON.stringify(DEFAULT_SKILLS)),
+    scripts: JSON.parse(JSON.stringify(DEFAULT_SCRIPTS)),
+    wins: [],
+    dumps: [],
+    activeFocus: "",
+    future: {g30:"", g1y:"", gw:""},
+    checkins: [],
+    finance: {budget:2500, target:3000, txs:[]},
+    quests: {home:false, wife:false, future:false}
+  };
+}
+
+let state = (() => {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return createDefaultState();
+    const parsed = JSON.parse(raw);
+    return Object.assign(createDefaultState(), parsed);
+  } catch(e) { return createDefaultState(); }
+})();
+
+// AUTO-RESET HARIAN + REKOD SEJARAH & STREAK
+function checkDailyRollover(){
+  const tk = todayKey();
+  if (state.lastDate && state.lastDate !== tk) {
+    const total = state.tasks.length || 1;
+    const doneCount = state.tasks.filter(t => t.done).length;
+    const pct = Math.round((doneCount / total) * 100);
+    state.history.push({date: state.lastDate, pct});
+    if (state.history.length > 14) state.history.shift();
+    if (pct >= 50) state.streak = (state.streak || 0) + 1;
+    else state.streak = 0;
+    state.tasks.forEach(t => t.done = false);
+    state.quests = {home:false, wife:false, future:false};
+    state.mood = "";
+    state.lastDate = tk;
+    saveState(false);
+  }
+}
+
+function saveState(rerender = true){
+  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  if (rerender) renderAll();
+}
+
+function addXP(amt, msg){
+  state.xp = (state.xp || 0) + amt;
+  playChime();
+  if (msg) showToast(`${msg} (+${amt} XP)`);
+  saveState();
+}
+
+// ==================== NAVIGASI ====================
+function switchTab(id, el){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  (el || document.getElementById('nav-' + id)).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function subTab(group, sub, btn){
+  const sec = document.getElementById('tab-' + group);
+  sec.querySelectorAll('.subtabs button').forEach(b => b.classList.remove('active'));
+  sec.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`${group}-${sub}`).classList.add('active');
+}
+
+// ==================== AUDIO ENGINE (OFFLINE WEB AUDIO) ====================
+let audioCtx = null, ambNode = null, ambGain = null, ambLfo = null, curAmb = null;
+function initAudio(){
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playChime(){
+  try{
+    initAudio();
+    [523.25, 659.25, 783.99].forEach((f, i) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.001, audioCtx.currentTime + i*0.2);
+      g.gain.exponentialRampToValueAtTime(0.16, audioCtx.currentTime + i*0.2 + 0.04);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i*0.2 + 0.7);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(audioCtx.currentTime + i*0.2); o.stop(audioCtx.currentTime + i*0.2 + 0.75);
+    });
+  } catch(e){}
+}
+
+function stopAmbient(){
+  try { if (ambNode) { ambNode.stop(); ambNode.disconnect(); } } catch(e){}
+  try { if (ambLfo) { ambLfo.stop(); ambLfo.disconnect(); } } catch(e){}
+  ambNode = null; ambLfo = null; curAmb = null;
+  ['rain','wave','wind'].forEach(k => {
+    const b = document.getElementById('snd-'+k);
+    if (b) { b.style.borderColor = ''; b.style.color = ''; }
+  });
+}
+
+function toggleAmbient(type){
+  if (curAmb === type) { stopAmbient(); return; }
+  stopAmbient();
+  try {
+    initAudio();
+    const bufSize = audioCtx.sampleRate * 3;
+    const buffer = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    let lastOut = 0;
+    for (let i = 0; i < bufSize; i++) {
+      const white = Math.random() * 2 - 1;
+      data[i] = (lastOut + (0.04 * white)) / 1.04;
+      lastOut = data[i];
+      data[i] *= 3.2;
+    }
+    const src = audioCtx.createBufferSource();
+    src.buffer = buffer; src.loop = true;
+
+    const filter = audioCtx.createBiquadFilter();
+    if (type === 'rain') { filter.type = 'lowpass'; filter.frequency.value = 950; }
+    else if (type === 'wave') { filter.type = 'lowpass'; filter.frequency.value = 420; }
+    else { filter.type = 'bandpass'; filter.frequency.value = 520; filter.Q.value = 1.4; }
+
+    const gain = audioCtx.createGain();
+    const vol = parseFloat(document.getElementById('ambVol').value || 0.18);
+    gain.gain.value = vol;
+
+    if (type === 'wave' || type === 'wind') {
+      const lfo = audioCtx.createOscillator(), lfoGain = audioCtx.createGain();
+      lfo.frequency.value = type === 'wave' ? 0.12 : 0.08;
+      lfoGain.gain.value = vol * 0.45;
+      lfo.connect(lfoGain); lfoGain.connect(gain.gain);
+      lfo.start(); ambLfo = lfo;
+    }
+
+    src.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    src.start();
+    ambNode = src; ambGain = gain; curAmb = type;
+    const b = document.getElementById('snd-'+type);
+    if (b) { b.style.borderColor = 'var(--gold)'; b.style.color = 'var(--gold)'; }
+    showToast('Bunyi latar dipasang');
+  } catch(e) { showToast('Audio tidak disokong browser ini'); }
+}
+function updateAmbVol(v){ if (ambGain) ambGain.gain.value = parseFloat(v); }
+
+// ==================== WAKE LOCK & PEMASA TEPAT (Date.now) ====================
+let wakeLock = null;
+async function reqWake(){ try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch(e){} }
+function relWake(){ try { if (wakeLock) { wakeLock.release(); wakeLock = null; } } catch(e){} }
+
+let phoneEnd = 0, phoneInt = null;
+function startPhoneDown(){
+  initAudio(); reqWake();
+  clearInterval(phoneInt);
+  phoneEnd = Date.now() + 15 * 60 * 1000;
+  document.getElementById('phoneOverlay').classList.add('show');
+  const tick = () => {
+    const rem = Math.max(0, Math.ceil((phoneEnd - Date.now()) / 1000));
+    const m = String(Math.floor(rem / 60)).padStart(2,'0'), s = String(rem % 60).padStart(2,'0');
+    document.getElementById('phoneTimer').textContent = rem > 0 ? `${m}:${s}` : 'SIAP!';
+    if (rem <= 0) { clearInterval(phoneInt); phoneInt = null; relWake(); addXP(15, '15 minit tanpa telefon selesai'); }
+  };
+  tick(); phoneInt = setInterval(tick, 500);
+}
+function stopPhoneDown(){
+  clearInterval(phoneInt); phoneInt = null; relWake();
+  document.getElementById('phoneOverlay').classList.remove('show');
+}
+
+// PEMASA FOKUS
+let focusSecs = 300, focusEnd = 0, focusInt = null;
+function renderFocusTimer(sec){
+  document.getElementById('timerDisplay').textContent = `${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;
+}
+function setTimer(m){
+  clearInterval(focusInt); focusInt = null; focusSecs = m * 60;
+  document.getElementById('startTimerBtn').textContent = 'Mula Buat';
+  renderFocusTimer(focusSecs);
+}
+function toggleTimer(){
+  initAudio();
+  const btn = document.getElementById('startTimerBtn');
+  if (focusInt) {
+    focusSecs = Math.max(0, Math.ceil((focusEnd - Date.now()) / 1000));
+    clearInterval(focusInt); focusInt = null; relWake();
+    btn.textContent = 'Sambung'; return;
+  }
+  reqWake(); focusEnd = Date.now() + focusSecs * 1000;
+  btn.textContent = 'Jeda';
+  focusInt = setInterval(() => {
+    const rem = Math.max(0, Math.ceil((focusEnd - Date.now()) / 1000));
+    renderFocusTimer(rem);
+    if (rem <= 0) {
+      clearInterval(focusInt); focusInt = null; focusSecs = 300; relWake();
+      btn.textContent = 'Siap!'; addXP(10, 'Sesi fokus tamat');
+    }
+  }, 500);
+}
+function resetTimer(){ setTimer(5); }
+
+// PEMASA SEMAK MINGGUAN 10 MINIT
+let ciEnd = 0, ciInt = null;
+function startCheckinTimer(){
+  initAudio(); clearInterval(ciInt);
+  ciEnd = Date.now() + 10 * 60 * 1000;
+  const tick = () => {
+    const rem = Math.max(0, Math.ceil((ciEnd - Date.now()) / 1000));
+    document.getElementById('ciTimer').textContent = rem > 0 ? `${String(Math.floor(rem/60)).padStart(2,'0')}:${String(rem%60).padStart(2,'0')}` : 'Tamat ✓';
+    if (rem <= 0) { clearInterval(ciInt); ciInt = null; playChime(); }
+  };
+  tick(); ciInt = setInterval(tick, 500);
+}
+
+// BREATHING
+let breathInt = null, breathStep = 0;
+const bSteps = [{t:"Tarik Nafas (4s)",g:1},{t:"Tahan (4s)",g:1},{t:"Hembus Perlahan (4s)",g:0},{t:"Tahan Kosong (4s)",g:0}];
+function toggleBreath(){
+  const c = document.getElementById('breathCircle'), b = document.getElementById('breathBtn');
+  if (breathInt) { clearInterval(breathInt); breathInt = null; c.textContent = 'Tekan Mula'; c.classList.remove('grow'); b.textContent = 'Mula Pernafasan'; return; }
+  b.textContent = 'Berhenti';
+  const run = () => { const s = bSteps[breathStep % 4]; c.textContent = s.t; c.classList.toggle('grow', !!s.g); breathStep++; };
+  run(); breathInt = setInterval(run, 4000);
+}
+
+// ==================== DASHBOARD, MOOD & HIKMAH ====================
+const RANKS = [
+  {min:0, name:"Pelatih Rumah"},
+  {min:100, name:"Pendekar Disiplin"},
+  {min:250, name:"Pengemudi Keluarga"},
+  {min:500, name:"Nakhoda Cekal"},
+  {min:900, name:"Lelaki Melayu Terakhir"}
+];
+
+const MOOD_ADVICE = {
+  tenang:"Alhamdulillah. Gunakan ketenangan ini untuk buat 1 kerja rumah tanpa disuruh atau rancang 1 langkah masa depan.",
+  penat:"Penat itu biasa, Nakhoda. Jangan paksa 100%—buat 1 kerja 5 minit (sinki atau sampah), lepas tu rehat tanpa rasa bersalah.",
+  serabut:"Bila kepala penuh, otak nak lari pegang telefon. Pergi ke tab Tenang → Brain Dump, tulis semua dan pilih SATU fokus saja.",
+  tegang:"Berhenti 10 saat. Tarik nafas dulu. Jangan membisu lama-lama—buka tab Kasih dan pilih 1 skrip jujur untuk redakan keadaan."
+};
+function setMood(m, btn){
+  state.mood = m; saveState();
+  const box = document.getElementById('moodReply');
+  box.textContent = MOOD_ADVICE[m]; box.style.display = 'block';
+}
+
+const HIKMAH = [
+  "Lelaki yang hebat bukan yang paling lantang di luar rumah, tetapi yang paling lembut hati dan paling cepat bertindak di dalam rumahnya sendiri.",
+  "Budi bahasa itu pakaian jiwa; kerja rumah yang kau siapkan tanpa disuruh ialah bukti cinta yang paling nyata.",
+  "Kalau tak mampu buat 100% hari ini, buat 10% tetap jauh lebih mulia daripada 0% sambil menyalahkan diri sendiri.",
+  "Diam seorang suami saat isteri memerlukan perhatian bukan tanda tenang—satu ayat jujur mampu meruntuhkan tembok dingin.",
+  "Kemasnya rumah dan terurusnya masa bermula dari keberanian meletakkan telefon selama 15 minit pertama setiap hari.",
+  "Biar penat membina disiplin hari ini, daripada penat menanggung rasa menyesal di masa depan."
+];
+let hIdx = new Date().getDate() % HIKMAH.length;
+function nextHikmah(){
+  hIdx = (hIdx + 1) % HIKMAH.length;
+  document.getElementById('hikmahBox').textContent = `"${HIKMAH[hIdx]}"`;
+}
+
+function toggleQuest(key){
+  state.quests[key] = !state.quests[key];
+  if (state.quests[key]) addXP(10, 'Misi harian selesai');
+  else saveState();
+}
+
+// ==================== BRAIN DUMP ====================
+function addDump(){
+  const inp = document.getElementById('dumpInput');
+  if (!inp.value.trim()) return;
+  state.dumps.unshift(inp.value.trim());
+  inp.value = ''; saveState();
+}
+function pickFocus(i){
+  state.activeFocus = state.dumps[i];
+  state.dumps.splice(i, 1);
+  saveState(); showToast('Fokus tunggal dikunci 🎯');
+}
+function delDump(i){ state.dumps.splice(i, 1); saveState(); }
+function finishFocusItem(){
+  if (!state.activeFocus) return;
+  state.wins.unshift({t: state.activeFocus, d: new Date().toLocaleDateString('ms-MY',{day:'2-digit',month:'short'})});
+  state.activeFocus = '';
+  addXP(15, 'Fokus tunggal selesai!');
+}
+function clearFocusItem(){
+  if (state.activeFocus) state.dumps.unshift(state.activeFocus);
+  state.activeFocus = ''; saveState();
+}
+
+// ==================== TUGAS, WINS, SKILLS & ADAB ====================
+function toggleTask(i){
+  state.tasks[i].done = !state.tasks[i].done;
+  if (state.tasks[i].done) addXP(5);
+  else saveState();
+}
+function delTask(i){ state.tasks.splice(i, 1); saveState(); }
+function addTask(){
+  const inp = document.getElementById('newTaskInput');
+  if (!inp.value.trim()) return;
+  state.tasks.push({text: inp.value.trim(), done: false});
+  inp.value = ''; saveState();
+}
+function addWin(){
+  const inp = document.getElementById('winInput');
+  if (!inp.value.trim()) return;
+  const d = new Date().toLocaleDateString('ms-MY',{day:'2-digit',month:'short'});
+  state.wins.unshift({t: inp.value.trim(), d});
+  if (state.wins.length > 20) state.wins.pop();
+  inp.value = ''; addXP(5, 'Kemenangan direkod');
+}
+function trainSkill(i){
+  const tk = todayKey();
+  if (state.skills[i].last === tk) { showToast('Sudah dilatih hari ini. Sambung esok!'); return; }
+  state.skills[i].xp += 10;
+  state.skills[i].last = tk;
+  addXP(10, 'Kemahiran meningkat');
+}
+function signIkrar(){
+  const tk = todayKey();
+  if (state.ikrarDate === tk) { showToast('Ikrar hari ini sudah disahkan ✓'); return; }
+  state.ikrarDate = tk;
+  addXP(15, 'Ikrar Lelaki Melayu Terakhir disahkan');
+}
+
+// ==================== KASIH: SKRIP, SEMAK & BUDI ====================
+function copyScript(i){ copyText(state.scripts[i].text, 'Skrip disalin ✓'); }
+function addCustomScript(){
+  const tag = document.getElementById('customTag').value.trim() || 'Skrip Sendiri';
+  const txt = document.getElementById('customScript').value.trim();
+  if (!txt) return;
+  state.scripts.push({tag, text: txt});
+  document.getElementById('customTag').value = '';
+  document.getElementById('customScript').value = '';
+  saveState(); showToast('Skrip disimpan');
+}
+function delScript(i){ state.scripts.splice(i, 1); saveState(); }
+
+function saveCheckin(){
+  const c1 = document.getElementById('ci1').value.trim();
+  const c2 = document.getElementById('ci2').value.trim();
+  const c3 = document.getElementById('ci3').value.trim();
+  const c4 = document.getElementById('ci4').value.trim();
+  if (!c1 && !c2 && !c3 && !c4) { showToast('Isi sekurang-kurangnya satu catatan'); return; }
+  const d = new Date().toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'});
+  state.checkins.unshift({d, c1, c2, c3, c4});
+  if (state.checkins.length > 12) state.checkins.pop();
+  ['ci1','ci2','ci3','ci4'].forEach(id => document.getElementById(id).value = '');
+  state.quests.wife = true;
+  addXP(25, 'Semak mingguan disimpan');
+}
+
+const BUDI_LIST = [
+  "Buatkan air panas atau minuman kegemaran isteri petang ni tanpa dia minta.",
+  "Picit bahu atau belakang isteri selama 3 minit malam ni sambil tanya khabar harinya.",
+  "Basuh semua pinggan dalam sinki dan lap dapur sampai berkilat sebelum dia masuk dapur.",
+  "Hantar mesej WhatsApp ringkas waktu kerja: 'Terima kasih awak jaga rumah & keluarga kita. Abang hargai sangat.'",
+  "Peluk isteri selama 10 saat tanpa bercakap apa-apa—biar dia rasa selamat dan disayangi.",
+  "Puji satu perkara spesifik tentang dirinya atau usahanya hari ini sambil memandang matanya.",
+  "Bawa dia keluar makan atau beli makanan kegemarannya hujung minggu ni, walaupun ringkas.",
+  "Letak telefon jauh-jauh selama 1 jam malam ni dan dengar cerita dia sepenuhnya tanpa menyampuk.",
+  "Kemas tempat tidur atau lipat satu bakul baju tanpa tunggu diminta.",
+  "Tanya dengan lembut: 'Apa satu benda yang abang boleh buat minggu ni untuk ringankan beban awak?'"
+];
+let budiIdx = new Date().getDate() % BUDI_LIST.length;
+function nextBudi(){
+  budiIdx = (budiIdx + 1) % BUDI_LIST.length;
+  document.getElementById('budiBox').textContent = BUDI_LIST[budiIdx];
+}
+function doneBudi(){
+  state.wins.unshift({t: 'Budi: ' + BUDI_LIST[budiIdx].slice(0,48) + '...', d: new Date().toLocaleDateString('ms-MY',{day:'2-digit',month:'short'})});
+  state.quests.wife = true;
+  addXP(15, 'Budi dilaksanakan 🌹');
+  nextBudi();
+}
+
+// ==================== ARAH: KOMPAS, KEWANGAN & ADAPTIF ====================
+const GOAL_TPL = {
+  rumah: {g30:"Konsisten sinki kosong, sampah dibuang, & 15 minit kemas rumah setiap hari", g1y:"Rumah sentiasa teratur, bersih, dan jadi tempat tenang untuk seluruh keluarga", gw:"1. Kemas 1 sudut paling bersepah\n2. Buang barang rosak/tak guna\n3. Kekalkan rutin 15 minit tanpa telefon"},
+  kasih: {g30:"Kurangkan diam, buat semak mingguan 10 minit, & 1 budi kecil setiap hari", g1y:"Rumahtangga harmoni, komunikasi terbuka, isteri rasa dihargai dan selamat", gw:"1. Ajak isteri duduk 10 minit semak mingguan\n2. Minta maaf tanpa ego jika terleka\n3. Luang masa keluar berdua hujung minggu"},
+  rezeki: {g30:"Kawal belanja harian, tambah kemahiran kerja/sampingan 30 minit sehari", g1y:"Simpanan kecemasan RM3,000–RM5,000 & kerjaya lebih stabil", gw:"1. Catat semua belanja 7 hari berturut-turut\n2. Asingkan simpanan awal bulan\n3. Kemas kini resume / projek sampingan 1 jam"},
+  diri: {g30:"Tidur lebih teratur, kurangkan skrol telefon 50%, & solat/ibadah lebih terjaga", g1y:"Jadi lelaki yang tenang emosi, kuat disiplin, dan dihormati keluarga", gw:"1. Letak telefon 30 minit sebelum tidur\n2. Buat pernafasan 4-4-4-4 setiap kali serabut\n3. Bersenam ringan 15 minit 3x seminggu"}
+};
+function applyGoalTpl(k){
+  const t = GOAL_TPL[k];
+  document.getElementById('goal30').value = t.g30;
+  document.getElementById('goal1y').value = t.g1y;
+  document.getElementById('goalWeek').value = t.gw;
+  showToast('Templat diisi—ubah ikut kesesuaian kau');
+}
+function saveFuturePlan(){
+  state.future = {
+    g30: document.getElementById('goal30').value.trim(),
+    g1y: document.getElementById('goal1y').value.trim(),
+    gw: document.getElementById('goalWeek').value.trim()
+  };
+  state.quests.future = true;
+  addXP(10, 'Pelan masa depan disimpan');
+}
+function sendGoalToTask(){
+  const lines = document.getElementById('goalWeek').value.split('\n').map(s => s.replace(/^\d+\.\s*/,'').trim()).filter(Boolean);
+  if (!lines.length) { showToast('Tulis dulu tindakan minggu ini'); return; }
+  state.tasks.push({text: '[Arah] ' + lines[0], done: false});
+  saveState(); showToast('Dihantar ke Tugas Harian ✓');
+}
+
+// KEWANGAN
+function updateFinSettings(){
+  state.finance.budget = Math.max(0, Number(document.getElementById('finBudgetInp').value) || 0);
+  state.finance.target = Math.max(1, Number(document.getElementById('finTargetInp').value) || 3000);
+  saveState();
+}
+function addTx(){
+  const type = document.getElementById('txType').value;
+  const cat = document.getElementById('txCat').value;
+  const note = document.getElementById('txNote').value.trim() || cat;
+  const amt = Number(document.getElementById('txAmt').value);
+  if (!amt || amt <= 0) { showToast('Masukkan jumlah RM yang sah'); return; }
+  const d = new Date().toLocaleDateString('ms-MY',{day:'2-digit',month:'short'});
+  state.finance.txs.unshift({type, cat, note, amt, d});
+  if (state.finance.txs.length > 30) state.finance.txs.pop();
+  document.getElementById('txNote').value = '';
+  document.getElementById('txAmt').value = '';
+  addXP(5, 'Transaksi direkod');
+}
+function delTx(i){ state.finance.txs.splice(i, 1); saveState(); }
+
+// ADAPTIVE THINKING
+const ADAPTIVE = {
+  penat:{r:"Penat itu normal, tapi buat 10% kerja jauh lebih baik daripada 0% dan rasa bersalah sepanjang malam.",p:"Jangan kemas seluruh rumah. Buat SATU kerja 5 minit saja (sinki atau sampah), lepas tu rehat.",act:"timer5",btn:"Mula Pemasa 5 Minit"},
+  messy:{r:"Otak beku sebab cuba tengok semua sepah serentak. Fokus pada 1 meter persegi depan mata saja.",p:"Ambil plastik sampah, kutip sampah atas meja & lantai selama 5 minit. Abaikan bilik lain dulu.",act:"timer5",btn:"Kemas 1 Sudut (5 Minit)"},
+  tegang:{r:"Bila kau diam, isteri rasa dia sorang-sorang. Membuka mulut bukan tanda kalah—itu tanda kau memimpin.",p:"Tarik nafas 1 pusingan, kemudian pilih 1 skrip jujur dan cakap dengan nada lembut.",act:"skrip",btn:"Buka Skrip Buka Mulut"},
+  telefon:{r:"Telefon ialah tempat lari bila otak serabut. Putuskan rantaian sekarang, bukan '5 minit lagi'.",p:"Tekan Mod Letak Telefon 15 Minit sekarang, cas jauh dari tangan, dan terus berdiri.",act:"phone",btn:"Aktifkan Mod Letak Telefon"},
+  kabur:{r:"Bila tak tahu nak buat apa, otak pilih jalan paling senang: baring dan skrol. Kunci 1 keutamaan saja.",p:"Buka Kompas Masa Depan, klik 1 templat pantas, dan hantar 1 tugas ke senarai harian.",act:"kompas",btn:"Buka Kompas Masa Depan"},
+  malas:{r:"Jangan tunggu mood rajin datang—tindakan yang cipta mood, bukan mood yang cipta tindakan.",p:"Guna Peraturan 2 Minit: bangun sekarang dan siapkan 1 tugas paling mudah dalam senarai.",act:"tugas",btn:"Lihat Senarai Tugas"}
+};
+let curAdAct = null;
+function runAdaptive(k, btn){
+  document.querySelectorAll('#arah-adaptif .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const d = ADAPTIVE[k];
+  document.getElementById('adReframe').textContent = d.r;
+  document.getElementById('adPlan').textContent = d.p;
+  document.getElementById('adActionBtn').textContent = d.btn;
+  curAdAct = d.act;
+  document.getElementById('adaptiveResult').style.display = 'block';
+}
+function doAdaptiveAction(){
+  if (curAdAct === 'phone') startPhoneDown();
+  else if (curAdAct === 'timer5') { switchTab('tugas'); setTimer(5); toggleTimer(); }
+  else if (curAdAct === 'skrip') switchTab('kasih');
+  else if (curAdAct === 'kompas') document.querySelector('#tab-arah .subtabs button').click();
+  else switchTab('tugas');
+}
+
+// BACKUP & RESTORE
+function exportData(){ copyText(JSON.stringify(state), 'Backup JSON disalin! Tampal di Notes.'); }
+function importData(){
+  const raw = prompt('Tampal teks JSON backup anda di sini:');
+  if (!raw) return;
+  try {
+    const d = JSON.parse(raw);
+    state = Object.assign(createDefaultState(), d);
+    saveState(); showToast('Backup berjaya dipulihkan ✓');
+  } catch(e) { alert('Format backup tidak sah.'); }
+}
+
+// ==================== RENDER SEMUA ====================
+function renderAll(){
+  const hr = new Date().getHours();
+  const greet = hr < 12 ? 'Selamat Pagi, Nakhoda' : hr < 15 ? 'Selamat Tengah Hari, Nakhoda' : hr < 19 ? 'Selamat Petang, Nakhoda' : 'Selamat Malam, Nakhoda';
+  document.getElementById('greetText').textContent = greet;
+  document.getElementById('xpBadge').textContent = `${state.xp} XP`;
+  document.getElementById('streakBadge').textContent = `🔥 ${state.streak} Hari`;
+
+  // Rank
+  let curR = RANKS[0], nextR = RANKS[1];
+  for (let i = 0; i < RANKS.length; i++) {
+    if (state.xp >= RANKS[i].min) { curR = RANKS[i]; nextR = RANKS[i+1] || null; }
+  }
+  document.getElementById('rankPill').textContent = `Pangkat: ${curR.name}`;
+  if (nextR) {
+    const pct = Math.min(100, Math.round(((state.xp - curR.min) / (nextR.min - curR.min)) * 100));
+    document.getElementById('rankBar').style.width = pct + '%';
+    document.getElementById('rankNext').textContent = `${nextR.min - state.xp} XP lagi ke pangkat "${nextR.name}"`;
+  } else {
+    document.getElementById('rankBar').style.width = '100%';
+    document.getElementById('rankNext').textContent = 'Pangkat Tertinggi Tercapai — Kekalkan Istiqamah!';
+  }
+
+  // Today %
+  const tTot = state.tasks.length || 1, tDone = state.tasks.filter(t => t.done).length;
+  const pctToday = Math.round((tDone / tTot) * 100);
+  document.getElementById('todayPct').textContent = pctToday + '%';
+
+  // Daily 3-Serangkai Quests
+  const qItems = [
+    {k:'home', lbl:'🏠 Rumah: Siapkan sekurang-kurangnya 2 tugas harian'},
+    {k:'wife', lbl:'❤️ Kasih: Buat 1 budi atau semak perasaan isteri'},
+    {k:'future', lbl:'🔭 Arah: Semak pelan masa depan atau catat kewangan'}
+  ];
+  document.getElementById('dailyQuestBox').innerHTML = qItems.map(q => `
+    <div class="task-item ${state.quests[q.k]?'done':''}">
+      <input type="checkbox" ${state.quests[q.k]?'checked':''} onchange="toggleQuest('${q.k}')">
+      <span>${q.lbl}</span>
+    </div>`).join('');
+
+  // History 7 days
+  const hist = state.history.slice(-6).concat([{date:'Hari Ini', pct:pctToday}]);
+  while (hist.length < 7) hist.unshift({date:'-', pct:0});
+  document.getElementById('histBars').innerHTML = hist.map(h => `
+    <div class="hist-col">
+      <div class="hist-bar ${h.pct>=50?'good':''}" style="height:${Math.max(8, Math.round(h.pct*0.42))}px"></div>
+      <div class="hist-lbl">${h.date==='Hari Ini'?'Kini':h.date.slice(-2)}</div>
+    </div>`).join('');
+
+  // Brain Dump
+  if (state.activeFocus) {
+    document.getElementById('activeFocusWrap').style.display = 'block';
+    document.getElementById('activeFocusText').textContent = state.activeFocus;
+    document.getElementById('dumpList').innerHTML = state.dumps.length ? `<p class="muted">(${state.dumps.length} perkara lain disorokkan sementara supaya kepala kau tenang.)</p>` : '';
+  } else {
+    document.getElementById('activeFocusWrap').style.display = 'none';
+    document.getElementById('dumpList').innerHTML = state.dumps.length ? state.dumps.map((d,i) => `
+      <div class="task-item">
+        <span>${esc(d)}</span>
+        <button class="btn btn-gold btn-sm" style="margin:0" onclick="pickFocus(${i})">🎯 Fokus</button>
+        <button class="del-btn" onclick="delDump(${i})">✕</button>
+      </div>`).join('') : '<p class="muted">Kepala lapang. Tulis di atas bila rasa serabut.</p>';
+  }
+
+  // Tasks
+  document.getElementById('taskList').innerHTML = state.tasks.map((t,i) => `
+    <div class="task-item ${t.done?'done':''}">
+      <input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${i})">
+      <span>${esc(t.text)}</span>
+      <button class="del-btn" onclick="delTask(${i})">✕</button>
+    </div>`).join('');
+
+  // Wins
+  document.getElementById('winList').innerHTML = state.wins.length ? state.wins.slice(0,10).map(w => `
+    <div class="task-item"><span>🏆 ${esc(w.t)}</span><small class="muted">${esc(w.d)}</small></div>`).join('') : '<p class="muted">Belum ada rekod kemenangan hari ini.</p>';
+
+  // Skills
+  const tk = todayKey();
+  document.getElementById('skillList').innerHTML = state.skills.map((s,i) => {
+    const lvl = Math.floor(s.xp / 50) + 1;
+    const pct = (s.xp % 50) * 2;
+    const drill = s.drills[Math.min(lvl - 1, s.drills.length - 1)];
+    const doneToday = s.last === tk;
+    return `<div class="skill-card">
+      <div class="skill-head"><span>${esc(s.name)}</span><span style="color:var(--gold)">Lv.${lvl} (${s.xp} XP)</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="muted" style="margin-bottom:6px">Latihan Lv.${lvl}: ${esc(drill)}</div>
+      <button class="btn ${doneToday?'btn-ghost':'btn-green'} btn-sm" onclick="trainSkill(${i})">${doneToday?'✅ Selesai Hari Ini':'Selesai Latihan (+10 XP)'}</button>
+    </div>`;
+  }).join('');
+
+  // Ikrar btn
+  const ib = document.getElementById('ikrarBtn');
+  if (state.ikrarDate === tk) { ib.textContent = '✅ Ikrar Hari Ini Telah Disahkan'; ib.className = 'btn btn-ghost'; }
+
+  // Scripts
+  document.getElementById('scriptList').innerHTML = state.scripts.map((s,i) => `
+    <div class="script-card">
+      <div class="script-tag">${esc(s.tag)}</div>
+      <div style="font-size:.88rem;margin-bottom:6px">"${esc(s.text)}"</div>
+      <div class="row">
+        <button class="btn btn-ghost btn-sm" onclick="copyScript(${i})">Salin Ayat</button>
+        ${i>=6?`<button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="delScript(${i})">Padam</button>`:''}
+      </div>
+    </div>`).join('');
+
+  // Checkin History
+  document.getElementById('ciHistory').innerHTML = state.checkins.length ? state.checkins.map(c => `
+    <div class="script-card">
+      <div class="script-tag">📅 ${esc(c.d)}</div>
+      <div class="muted">
+        ${c.c1?`<b>Penat:</b> ${esc(c.c1)}<br>`:''}
+        ${c.c2?`<b>Syukur:</b> ${esc(c.c2)}<br>`:''}
+        ${c.c3?`<b>Baiki:</b> ${esc(c.c3)}<br>`:''}
+        ${c.c4?`<b>Rancang:</b> ${esc(c.c4)}`:''}
+      </div>
+    </div>`).join('') : '<p class="muted">Belum ada rekod semak mingguan. Cuba mulakan hujung minggu ni!</p>';
+
+  // Future Plan
+  document.getElementById('goal30').value = state.future.g30 || '';
+  document.getElementById('goal1y').value = state.future.g1y || '';
+  document.getElementById('goalWeek').value = state.future.gw || '';
+
+  // Finance
+  document.getElementById('finBudgetInp').value = state.finance.budget || '';
+  document.getElementById('finTargetInp').value = state.finance.target || '';
+  let totExp = 0, totSav = 0;
+  state.finance.txs.forEach(t => { if (t.type === 'sav') totSav += t.amt; else totExp += t.amt; });
+  const bal = (state.finance.budget || 0) - totExp;
+  document.getElementById('finBal').textContent = `RM ${bal.toLocaleString('ms-MY')}`;
+  document.getElementById('finBal').style.color = bal < 0 ? 'var(--red)' : 'var(--gold)';
+  document.getElementById('finSav').textContent = `RM ${totSav.toLocaleString('ms-MY')}`;
+  const savPct = Math.min(100, Math.round((totSav / (state.finance.target || 3000)) * 100));
+  document.getElementById('savBar').style.width = savPct + '%';
+  document.getElementById('savLbl').textContent = `Tabung Kecemasan: ${savPct}% daripada sasaran RM ${(state.finance.target||3000).toLocaleString('ms-MY')}`;
+  document.getElementById('txList').innerHTML = state.finance.txs.length ? state.finance.txs.slice(0,12).map((t,i) => `
+    <div class="task-item">
+      <span><b style="color:${t.type==='sav'?'var(--green)':'var(--warn)'}">${t.type==='sav'?'+':'-'}RM${t.amt}</b> · ${esc(t.note)} <small class="muted">(${esc(t.d)})</small></span>
+      <button class="del-btn" onclick="delTx(${i})">✕</button>
+    </div>`).join('') : '<p class="muted">Belum ada rekod kewangan bulan ini.</p>';
+}
+
+// INIT
+checkDailyRollover();
+document.getElementById('hikmahBox').textContent = `"${HIKMAH[hIdx]}"`;
+document.getElementById('budiBox').textContent = BUDI_LIST[budiIdx];
+renderAll();
+</script>
+</body>
+</html>
