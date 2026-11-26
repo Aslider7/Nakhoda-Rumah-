@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0B1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>LangkahBaru — Panduan Hidup, Anti-Tangguh & Rohani Harian</title>
+  <style>
+    :root {
+      --bg: #0B1117;
+      --bg-elevated: #121A23;
+      --card: #16202B;
+      --card-soft: #1C2836;
+      --border: #253445;
+      --text: #EDF2F7;
+      --text-muted: #94A3B8;
+      --text-soft: #64748B;
+      --primary: #34D399;
+      --primary-dark: #10B981;
+      --primary-glow: rgba(52, 211, 153, 0.14);
+      --gold: #F5C451;
+      --gold-glow: rgba(245, 196, 81, 0.14);
+      --danger: #F87171;
+      --danger-soft: rgba(248, 113, 113, 0.14);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --nav-height: 70px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 16px 16px calc(var(--nav-height) + 28px);
+      position: relative;
+    }
+
+    /* Header */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.22), rgba(245, 196, 81, 0.18));
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .brand p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .pill-btn:active { transform: scale(0.96); }
+
+    .pill-btn.pro-badge {
+      border-color: rgba(245, 196, 81, 0.45);
+      background: var(--gold-glow);
+      color: var(--gold);
+    }
+
+    .pill-btn.pro-active {
+      border-color: rgba(52, 211, 153, 0.45);
+      background: var(--primary-glow);
+      color: var(--primary);
+    }
+
+    /* Cards & Sections */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-soft {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 13px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--primary-glow);
+      color: var(--primary);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .tag.gold {
+      background: var(--gold-glow);
+      color: var(--gold);
+      border-color: rgba(245, 196, 81, 0.3);
+    }
+
+    /* Gentle Greeting Banner */
+    .welcome-card {
+      background: linear-gradient(145deg, #13222E 0%, #16202B 60%, #19242C 100%);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-quote {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .stat-box {
+      background: rgba(11, 17, 23, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-val.gold { color: var(--gold); }
+
+    .stat-lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Emergency Lazy Button */
+    .emergency-btn {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(245, 196, 81, 0.35);
+      background: linear-gradient(135deg, rgba(245, 196, 81, 0.14), rgba(52, 211, 153, 0.08));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      margin-bottom: 14px;
+      text-align: left;
+      transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+
+    .emergency-btn:active { transform: scale(0.985); }
+
+    .emergency-btn strong {
+      display: block;
+      font-size: 0.94rem;
+      color: var(--gold);
+    }
+
+    .emergency-btn span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 15px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: transform 0.14s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--primary-dark);
+      color: #052E21;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #241902;
+    }
+
+    .btn-ghost {
+      background: var(--card-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 0.76rem;
+      border-radius: 10px;
+    }
+
+    .btn-block { width: 100%; }
+
+    /* Inputs */
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="text"]:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 76px;
+    }
+
+    /* Rule of 3 Tasks */
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 11px 12px;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .task-item.done {
+      border-color: rgba(52, 211, 153, 0.35);
+      opacity: 0.72;
+    }
+
+    .check-circle {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--text-soft);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #052E21;
+      transition: all 0.2s ease;
+    }
+
+    .task-item.done .check-circle {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .task-text {
+      flex: 1;
+      font-size: 0.88rem;
+      word-break: break-word;
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .task-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+
+    .icon-btn:hover { color: var(--text); border-color: var(--text-soft); }
+
+    .add-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Prayer Time Blocks */
+    .prayer-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .prayer-block {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    .prayer-block.done {
+      border-color: rgba(52, 211, 153, 0.4);
+      background: rgba(52, 211, 153, 0.05);
+    }
+
+    .prayer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .prayer-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prayer-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Timer Box */
+    .timer-display {
+      text-align: center;
+      padding: 14px 10px;
+      background: var(--bg-elevated);
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .timer-clock {
+      font-size: 2.55rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .timer-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .timer-presets {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      background: var(--card-soft);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--primary-glow);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Arabic & Spiritual Content */
+    .arabic-text {
+      font-family: "Amiri", "Scheherazade New", "Traditional Arabic", "Geeza Pro", serif;
+      font-size: 1.48rem;
+      line-height: 2.15;
+      text-align: right;
+      direction: rtl;
+      color: #F8FAFC;
+      margin: 10px 0;
+      padding: 12px 14px;
+      background: rgba(11, 17, 23, 0.55);
+      border-radius: 13px;
+      border-right: 3px solid var(--gold);
+    }
+
+    .rumi-text {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 8px;
+      background: rgba(245, 196, 81, 0.06);
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+
+    .meaning-text {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .source-text {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .action-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--primary-glow);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      font-size: 0.82rem;
+      color: #D1FAE5;
+    }
+
+    .action-box strong {
+      color: var(--primary);
+    }
+
+    /* Tasbih Digital */
+    .tasbih-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0 6px;
+    }
+
+    .tasbih-ring-wrap {
+      position: relative;
+      width: 224px;
+      height: 224px;
+      margin: 14px 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .tasbih-svg {
+      position: absolute;
+      inset: 0;
+      transform: rotate(-90deg);
+    }
+
+    .tasbih-tap-btn {
+      width: 184px;
+      height: 184px;
+      border-radius: 50%;
+      border: 2px solid rgba(52, 211, 153, 0.35);
+      background: radial-gradient(circle at 30% 25%, #1F3545, #111C26 75%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), inset 0 2px 12px rgba(52, 211, 153, 0.14);
+      transition: transform 0.08s ease, box-shadow 0.12s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tasbih-tap-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), inset 0 2px 18px rgba(52, 211, 153, 0.3);
+    }
+
+    .tasbih-count {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tasbih-target {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .tasbih-hint {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+    /* Roadmap Pillars */
+    .pillar-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pillar-tab {
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .pillar-tab.active {
+      border-color: var(--primary);
+      background: var(--primary-glow);
+      color: var(--text);
+    }
+
+    /* Lock Overlay for Pro features */
+    .pro-lock-box {
+      background: linear-gradient(145deg, rgba(245, 196, 81, 0.09), rgba(18, 26, 35, 0.95));
+      border: 1px dashed rgba(245, 196, 81, 0.45);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .pro-lock-box h4 {
+      color: var(--gold);
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+    }
+
+    .pro-lock-box p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Tabs & Bottom Nav */
+    .view { display: none; animation: fadeIn 0.2s ease; }
+    .view.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 520px;
+      height: var(--nav-height);
+      background: rgba(11, 17, 23, 0.94);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 6px 6px 10px;
+      z-index: 40;
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      color: var(--text-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 0.67rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-item .nav-ic { font-size: 1.25rem; line-height: 1; }
+
+    .nav-item.active {
+      color: var(--primary);
+      background: rgba(52, 211, 153, 0.08);
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 12, 0.8);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      padding: 12px;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 500px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: slideUp 0.2s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .modal-head h3 { font-size: 1.02rem; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: #132A24;
+      color: #D1FAE5;
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      z-index: 120;
+      transition: transform 0.25s ease;
+      box-shadow: var(--shadow);
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .sub-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-elevated);
+      padding: 5px;
+      border-radius: 13px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .sub-tab {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 6px;
+      border-radius: 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .sub-tab.active {
+      background: var(--card-soft);
+      color: var(--primary);
+    }
+
+    .doa-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
+    .doa-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .history-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+    }
+
+    .history-date {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.84rem;
+    }
+
+    .muted { color: var(--text-muted); font-size: 0.8rem; }
+    .mt-8 { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mb-8 { margin-bottom: 8px; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .flex-gap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="toast" id="toast">Tersimpan</div>
+
+  <div class="app-shell">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">🌙</div>
+        <div>
+          <h1>LangkahBaru</h1>
+          <p id="todayDateLabel">Tenang, satu langkah kecil hari ini</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="pill-btn pro-badge" id="proStatusBtn" onclick="openModal('proModal')">⭐ Pro</button>
+        <button class="pill-btn" onclick="openModal('settingsModal')" aria-label="Tetapan">⚙️</button>
+      </div>
+    </header>
+
+    <!-- ==================== VIEW 1: HARI INI ==================== -->
+    <section class="view active" id="view-today">
+      <div class="card welcome-card">
+        <p class="welcome-quote" id="gentleGreeting">
+          Tak mengapa kalau semalam rasa serabut atau terlepas. Hari ini hela nafas perlahan — kita mula dengan satu langkah paling kecil dulu.
+        </p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-val" id="statStreak">1</div>
+            <div class="stat-lbl">Hari Bangkit</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val gold" id="statTasksDone">0/3</div>
+            <div class="stat-lbl">Fokus Hari Ini</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="statZikirToday">0</div>
+            <div class="stat-lbl">Zikir Hari Ini</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMERGENCY PROCRASTINATION BUTTON -->
+      <button class="emergency-btn" onclick="openLazyRescue()">
+        <div>
+          <strong>😮‍💨 Rasa Malas, Berat Hati atau Buntu?</strong>
+          <span>Tekan sini — doa ringkas + 1 langkah mikro 2 minit sahaja.</span>
+        </div>
+        <span style="font-size:1.35rem;">→</span>
+      </button>
+
+      <!-- RULE OF 3 TASKS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🎯 Fokus 3 Perkara Hari Ini</div>
+            <div class="card-sub">Hadkan 3 sahaja supaya fikiran tidak lemas.</div>
+          </div>
+          <span class="tag" id="taskCountBadge">0 / 3</span>
+        </div>
+
+        <div class="task-list" id="todayTaskList"></div>
+
+        <div class="add-row" id="taskInputRow">
+          <input type="text" id="newTaskInput" placeholder="Contoh: Kemas meja kerja 5 minit..." maxlength="90" />
+          <button class="btn btn-primary" onclick="addTodayTask()">Tambah</button>
+        </div>
+        <p class="muted mt-8" id="taskLimitMsg" style="display:none;">
+          Cukup 3 tugasan utama hari ini. Fokus siapkan satu demi satu dengan tenang.
+        </p>
+      </div>
+
+      <!-- FOCUS TIMER -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">⏱️ Pemasa Mula Perlahan</div>
+            <div class="card-sub" id="activeTimerTaskLabel">Pecahkan rasa berat nak mula dengan 5 minit dulu.</div>
+          </div>
+        </div>
+
+        <div class="timer-presets">
+          <button class="chip active" id="preset-5" onclick="selectTimerMinutes(5)">5 Minit (Percuma)</button>
+          <button class="chip" id="preset-15" onclick="selectTimerMinutes(15)">15 Minit ⭐</button>
+          <button class="chip" id="preset-25" onclick="selectTimerMinutes(25)">25 Minit ⭐</button>
+        </div>
+
+        <div class="timer-display">
+          <div class="timer-clock" id="timerClock">05:00</div>
+          <div class="timer-label" id="timerStatus">Sedia bila-bila masa awak rasa tenang.</div>
+        </div>
+
+        <div class="flex-gap">
+          <button class="btn btn-primary" style="flex:1;" id="timerStartBtn" onclick="toggleTimer()">▶ Mula Fokus</button>
+          <button class="btn btn-ghost" onclick="resetTimer()">↺ Set Semula</button>
+        </div>
+      </div>
+
+      <!-- PRAYER TIME BLOCKS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🕌 Blok Masa Ikut Waktu Solat</div>
+            <div class="card-sub">Susun hari ikut 4 fasa berkat — ringkas & realistik.</div>
+          </div>
+          <span class="tag gold" id="prayerProTag">⭐ Pro</span>
+        </div>
+
+        <div class="prayer-grid" id="prayerBlocksContainer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: ROHANI HARIAN ==================== -->
+    <section class="view" id="view-rohani">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchRohaniTab('quran', this)">📖 Al-Quran</button>
+        <button class="sub-tab" onclick="switchRohaniTab('hadis', this)">📜 Hadis Sahih</button>
+        <button class="sub-tab" onclick="switchRohaniTab('doa', this)">🤲 Doa Harian</button>
+      </div>
+
+      <!-- QURAN PANEL -->
+      <div id="rohani-quran">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">📖 Ayat Al-Quran Hari Ini</div>
+              <div class="card-sub">Renungan pendek untuk kuatkan hati & arah hidup.</div>
+            </div>
+            <span class="tag" id="quranIndexTag">1 / 7</span>
+          </div>
+          <div id="quranContent"></div>
+          <div class="flex-between mt-12">
+            <button class="btn btn-ghost btn-sm" onclick="stepQuran(-1)">← Sebelum</button>
+            <button class="btn btn-ghost btn-sm" onclick="stepQuran(1)">Seterusnya →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HADIS PANEL -->
+      <div id="rohani-hadis" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">📜 Hadis Sahih Hari Ini</div>
+              <div class="card-sub">100% daripada Sahih al-Bukhari & Sahih Muslim sahaja.</div>
+            </div>
+            <span class="tag" id="hadisIndexTag">1 / 7</span>
+          </div>
+          <div id="hadisContent"></div>
+          <div class="flex-between mt-12">
+            <button class="btn btn-ghost btn-sm" onclick="stepHadis(-1)">← Sebelum</button>
+            <button class="btn btn-ghost btn-sm" onclick="stepHadis(1)">Seterusnya →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOA PANEL -->
+      <div id="rohani-doa" style="display:none;">
+        <div class="card">
+          <div class="flex-between mb-8">
+            <div>
+              <div class="card-title">🤲 Doa Penting Kehidupan Seharian</div>
+              <div class="card-sub">Dipilih khusus untuk melawan malas, serabut & cari ketenangan.</div>
+            </div>
+          </div>
+          <div class="toggle-row" style="border-bottom:1px solid var(--border); margin-bottom:12px;">
+            <span>Papar bacaan Rumi</span>
+            <button class="pill-btn" id="rumiToggleBtn" onclick="toggleRumi()">Rumi: Hidup</button>
+          </div>
+          <div id="doaListContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: TASBIH DIGITAL ==================== -->
+    <section class="view" id="view-tasbih">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">📿 Zikir & Tasbih Digital</div>
+            <div class="card-sub">Tenangkan fikiran dengan zikir perlahan-lahan.</div>
+          </div>
+          <span class="tag">Jumlah: <span id="tasbihTotalLifetime">0</span></span>
+        </div>
+
+        <select id="zikirSelect" onchange="changeZikirPreset()" style="margin-bottom:10px;"></select>
+
+        <div class="arabic-text" id="zikirArabicDisplay" style="text-align:center; border-right:none; border-bottom:2px solid var(--primary); font-size:1.55rem;"></div>
+        <p class="muted" id="zikirMeaningDisplay" style="text-align:center; margin-bottom:10px;"></p>
+
+        <div class="timer-presets">
+          <button class="chip active" id="target-33" onclick="setTasbihTarget(33)">33</button>
+          <button class="chip" id="target-99" onclick="setTasbihTarget(99)">99</button>
+          <button class="chip" id="target-100" onclick="setTasbihTarget(100)">100</button>
+          <button class="chip" id="target-0" onclick="setTasbihTarget(0)">Bebas</button>
+        </div>
+
+        <div class="tasbih-stage">
+          <div class="tasbih-ring-wrap">
+            <svg class="tasbih-svg" width="224" height="224" viewBox="0 0 224 224">
+              <circle cx="112" cy="112" r="102" fill="none" stroke="#1E2B38" stroke-width="8"></circle>
+              <circle id="tasbihProgressCircle" cx="112" cy="112" r="102" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-dasharray="640.88" stroke-dashoffset="640.88"></circle>
+            </svg>
+            <button class="tasbih-tap-btn" onclick="tapTasbih()">
+              <div class="tasbih-count" id="tasbihCount">0</div>
+              <div class="tasbih-target" id="tasbihTargetLabel">Sasaran: 33</div>
+              <div class="tasbih-hint">Tekan di sini</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex-between mt-8">
+          <div class="flex-gap">
+            <button class="pill-btn" id="vibeToggleBtn" onclick="toggleVibe()">📳 Getar: Ya</button>
+            <button class="pill-btn" id="soundToggleBtn" onclick="toggleSound()">🔊 Bunyi: Ya</button>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="resetTasbihCurrent()">↺ Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: PELAN HIDUP ==================== -->
+    <section class="view" id="view-pelan">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🗺️ Pelan Hidup Ringkas (Roadmap)</div>
+            <div class="card-sub">Bina arah hidup tanpa rasa terbeban — ikut 4 tiang utama.</div>
+          </div>
+          <span class="tag gold" id="roadmapProTag">⭐ Pro</span>
+        </div>
+
+        <div class="pillar-tabs">
+          <button class="pillar-tab active" onclick="selectPillar('ibadah', this)">🕌 Ibadah</button>
+          <button class="pillar-tab" onclick="selectPillar('kerjaya', this)">💼 Kerjaya & Rezeki</button>
+          <button class="pillar-tab" onclick="selectPillar('keluarga', this)">🏡 Keluarga</button>
+          <button class="pillar-tab" onclick="selectPillar('kesihatan', this)">💚 Kesihatan & Diri</button>
+        </div>
+
+        <div id="roadmapContent"></div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 5: MUHASABAH ==================== -->
+    <section class="view" id="view-muhasabah">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🌌 Muhasabah 30 Saat Sebelum Tidur</div>
+            <div class="card-sub">Tutup hari dengan syukur & maafkan diri sendiri.</div>
+          </div>
+        </div>
+
+        <label class="muted" for="muhWin" style="display:block; margin-bottom:5px;">1. Apakah 1 kejayaan kecil hari ini (walaupun sekecil solat awal waktu atau kemas katil)?</label>
+        <textarea id="muhWin" placeholder="Contoh: Hari ini saya berjaya buat 1 tugasan tanpa tangguh..."></textarea>
+
+        <label class="muted mt-12" for="muhImprove" style="display:block; margin-bottom:5px;">2. Apakah 1 perkara kecil yang mahu dibaiki esok dengan lebih tenang?</label>
+        <textarea id="muhImprove" placeholder="Contoh: Esok saya mahu letak telefon 15 minit lepas Subuh..."></textarea>
+
+        <button class="btn btn-primary btn-block mt-12" onclick="saveMuhasabah()">Simpan Muhasabah Malam Ini</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📓 Catatan Perjalanan Awak</div>
+          <span class="tag gold" id="historyProTag">⭐ Pro</span>
+        </div>
+        <div id="muhasabahHistoryList"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="switchView('today', this)">
+      <span class="nav-ic">☀️</span><span>Hari Ini</span>
+    </button>
+    <button class="nav-item" onclick="switchView('rohani', this)">
+      <span class="nav-ic">📖</span><span>Rohani</span>
+    </button>
+    <button class="nav-item" onclick="switchView('tasbih', this)">
+      <span class="nav-ic">📿</span><span>Tasbih</span>
+    </button>
+    <button class="nav-item" onclick="switchView('pelan', this)">
+      <span class="nav-ic">🗺️</span><span>Pelan</span>
+    </button>
+    <button class="nav-item" onclick="switchView('muhasabah', this)">
+      <span class="nav-ic">🌌</span><span>Refleksi</span>
+    </button>
+  </nav>
+
+  <!-- ==================== MODAL: RASA MALAS / BUNTU ==================== -->
+  <div class="modal-backdrop" id="lazyModal" onclick="closeModalOnBackdrop(event, 'lazyModal')">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3>😮‍💨 Mod Tenang: Bila Rasa Malas</h3>
+        <button class="icon-btn" onclick="closeModal('lazyModal')">✕</button>
+      </div>
+      <p class="muted mb-8">Jangan marah diri sendiri. Rasa berat hati itu biasa bila fikiran penat. Baca doa pendek ini sekali, kemudian buat 1 langkah 2 minit sahaja.</p>
+
+      <div class="arabic-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ</div>
+      <div class="rumi-text">Allahumma inni a'udzu bika minal-'ajzi wal-kasal.</div>
+      <p class="meaning-text">"Ya Allah, sesungguhnya aku berlindung kepada-Mu daripada sifat lemah dan sifat malas." <span class="muted">(Sahih al-Bukhari, 6369)</span></p>
+
+      <div class="action-box">
+        <strong>Langkah Mikro 2 Minit Untuk Sekarang:</strong>
+        <p id="microStepText" style="margin-top:4px; font-size:0.9rem; color:#fff;"></p>
+      </div>
+
+      <div class="timer-display mt-12">
+        <div class="timer-clock" id="microClock" style="font-size:2rem;">02:00</div>
+        <div class="timer-label">Cukup 2 minit sahaja. Lepas itu awak bebas berhenti atau sambung.</div>
+      </div>
+
+      <div class="flex-gap">
+        <button class="btn btn-primary" style="flex:1;" id="microStartBtn" onclick="toggleMicroTimer()">▶ Mula 2 Minit</button>
+        <button class="btn btn-ghost" onclick="pickRandomMicroStep()">🔄 Tukar Langkah</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: PRO UPGRADE ==================== -->
+  <div class="modal-backdrop" id="proModal" onclick="closeModalOnBackdrop(event, 'proModal')">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3>⭐ LangkahBaru Pro (Akses Seumur Hidup)</h3>
+        <button class="icon-btn" onclick="closeModal('proModal')">✕</button>
+      </div>
+
+      <div id="proUnlockedNotice" style="display:none;" class="action-box mb-8">
+        <strong>🎉 Alhamdulillah! Akses Pro Awak Sudah Aktif.</strong>
+        <p style="margin-top:4px;">Semua modul Pelan Hidup 90 Hari, Blok Masa Solat, Koleksi Doa Lengkap & Sejarah Muhasabah telah dibuka sepenuhnya.</p>
+      </div>
+
+      <div class="card-soft mb-8">
+        <p style="font-size:0.86rem; font-weight:700; color:var(--gold); margin-bottom:8px;">Apa yang dibuka dalam versi Pro?</p>
+        <ul style="padding-left:18px; font-size:0.82rem; color:var(--text-muted); display:grid; gap:6px;">
+          <li>🕌 <strong>Blok Masa Ikut Waktu Solat</strong> (Subuh hingga Isyak) boleh edit & simpan harian.</li>
+          <li>🗺️ <strong>Pelan Hidup Mingguan & 90 Hari</strong> lengkap untuk Ibadah, Kerjaya, Keluarga & Kesihatan.</li>
+          <li>🤲 <strong>Koleksi Lengkap 8 Doa Sahih Harian</strong> beserta panduan Rumi.</li>
+          <li>⏱️ <strong>Pemasa Fokus 15 & 25 Minit</strong> untuk kerja mendalam.</li>
+          <li>📓 <strong>Arkib Penuh Muhasabah</strong> + Backup & Restore data JSON.</li>
+        </ul>
+      </div>
+
+      <div id="proPurchaseArea">
+        <a id="paymentLinkBtn" href="#LINK_BAYARAN_TOYYIBPAY" target="_blank" rel="noopener" class="btn btn-gold btn-block" style="text-decoration:none; margin-bottom:12px;">
+          💳 Dapatkan Kod Akses Pro (Bayaran Sekali Sahaja)
+        </a>
+
+        <p class="muted mb-8" style="text-align:center;">Sudah ada Kod Akses Pro? Masukkan di bawah:</p>
+        <div class="add-row">
+          <input type="text" id="proCodeInput" placeholder="Masukkan kod akses..." style="text-transform:uppercase;" />
+          <button class="btn btn-primary" onclick="activateProCode()">Aktifkan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: TETAPAN & BACKUP ==================== -->
+  <div class="modal-backdrop" id="settingsModal" onclick="closeModalOnBackdrop(event, 'settingsModal')">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3>⚙️ Tetapan & Simpanan Data</h3>
+        <button class="icon-btn" onclick="closeModal('settingsModal')">✕</button>
+      </div>
+      <p class="muted mb-8">Semua data awak disimpan 100% dalam telefon ini secara offline (privasi terjaga). Gunakan fungsi Backup jika mahu tukar telefon.</p>
+
+      <div class="flex-gap" style="flex-direction:column; align-items:stretch;">
+        <button class="btn btn-ghost btn-block" onclick="exportDataJSON()">⬇️ Eksport Backup Data (.JSON)</button>
+        <label class="btn btn-ghost btn-block" style="cursor:pointer;">
+          ⬆️ Import Backup Data (.JSON)
+          <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="importDataJSON(event)" />
+        </label>
+        <button class="btn btn-danger btn-block mt-8" onclick="resetAllData()">🗑️ Padam Semua Data & Mula Semula</button>
+      </div>
+      <p class="muted mt-12" style="text-align:center; font-size:0.72rem;">LangkahBaru v1.0 • 100% Offline PWA</p>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       KONFIGURASI PEMILIK APP (TUKAR LINK BAYARAN & KOD AKSES PRO DI SINI)
+       ========================================================================= */
+    const APP_CONFIG = {
+      appName: "LangkahBaru",
+      // Tukar kepada link ToyyibPay / Gumroad / WhatsApp anda sebelum jual:
+      paymentUrl: "https://toyyibpay.com/GANTI-LINK-ANDA",
+      // Senarai kod akses Pro yang sah (huruf besar):
+      validProCodes: ["LANGKAHPRO2026", "PRO2026", "HIJRAHPRO"],
+      storageKey: "langkahbaru_pwa_v1"
+    };
+
+    /* =========================================================================
+       DATA ROHANI HARIAN (AL-QURAN, HADIS 100% SAHIH & DOA PENTING)
+       ========================================================================= */
+    const QURAN_DAILY = [
+      {
+        arab: "إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ",
+        terjemahan: "Sesungguhnya Allah tidak mengubah apa yang ada pada sesuatu kaum sehingga mereka mengubah apa yang ada pada diri mereka sendiri.",
+        rujukan: "Surah Ar-Ra'd (13:11)",
+        tindakan: "Pilih satu tabiat kecil hari ini yang awak betul-betul mahu ubah, walaupun hanya mengambil masa 5 minit."
+      },
+      {
+        arab: "وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+        terjemahan: "Demi Masa! Sesungguhnya manusia itu dalam kerugian — kecuali orang-orang yang beriman dan beramal soleh, dan mereka pula berpesan-pesan dengan kebenaran serta berpesan-pesan dengan sabar.",
+        rujukan: "Surah Al-Asr (103:1-3)",
+        tindakan: "Letakkan telefon selama 15 minit dan siapkan tugasan pertama dalam senarai Fokus Hari Ini."
+      },
+      {
+        arab: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+        terjemahan: "Oleh itu, maka (tetapkanlah kepercayaanmu) bahawa sesungguhnya tiap-tiap kesukaran disertai kemudahan. Sesungguhnya tiap-tiap kesukaran disertai kemudahan.",
+        rujukan: "Surah Al-Insyirah (94:5-6)",
+        tindakan: "Jika hidup terasa sempit hari ini, pecahkan masalah kepada satu langkah kecil yang mampu dibuat sekarang."
+      },
+      {
+        arab: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+        terjemahan: "Allah tidak memberati seseorang melainkan apa yang terdaya olehnya.",
+        rujukan: "Surah Al-Baqarah (2:286)",
+        tindakan: "Berhenti membandingkan diri dengan orang lain. Fokus buat yang terbaik mengikut kapasiti awak hari ini."
+      },
+      {
+        arab: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ",
+        terjemahan: "Dan sesiapa yang bertakwa kepada Allah, nescaya Allah akan mengadakan baginya jalan keluar (dari segala perkara yang menyusahkannya), serta memberinya rezeki dari jalan yang tidak terlintas di hatinya.",
+        rujukan: "Surah At-Talaq (65:2-3)",
+        tindakan: "Jaga satu waktu solat hari ini di awal waktu sebagai tanda menjaga hubungan dengan Allah."
+      },
+      {
+        arab: "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَلْتَنظُرْ نَفْسٌ مَّا قَدَّمَتْ لِغَدٍ",
+        terjemahan: "Wahai orang-orang yang beriman! Bertakwalah kepada Allah, dan hendaklah tiap-tiap diri melihat dan memerhatikan apa yang ia telah sediakan untuk hari esok.",
+        rujukan: "Surah Al-Hasyr (59:18)",
+        tindakan: "Luangkan 2 minit malam ini untuk merancang 3 perkara utama esok supaya bangun pagi dengan jelas."
+      },
+      {
+        arab: "لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا",
+        terjemahan: "Janganlah kamu berputus asa dari rahmat Allah, kerana sesungguhnya Allah mengampunkan segala dosa.",
+        rujukan: "Surah Az-Zumar (39:53)",
+        tindakan: "Maafkan kesilapan semalam, beristighfar 10 kali, dan mulakan lembaran baru saat ini juga."
+      }
+    ];
+
+    // 100% SAHIH SAHAJA (Sahih al-Bukhari & Sahih Muslim)
+    const HADIS_SAHIH = [
+      {
+        arab: "أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ تَعَالَى أَدْوَمُهَا وَإِنْ قَلَّ",
+        terjemahan: "Amalan yang paling dicintai oleh Allah Ta'ala ialah amalan yang paling berterusan (istiqamah) walaupun sedikit.",
+        rujukan: "Sahih al-Bukhari (6464) & Sahih Muslim (783)",
+        pengajaran: "Tak perlu ubah hidup secara drastik dalam sehari. Buat sedikit tetapi konsisten jauh lebih kuat dan berkekalan."
+      },
+      {
+        arab: "نِعْمَتَانِ مَغْبُونٌ فِيهِمَا كَثِيرٌ مِنَ النَّاسِ: الصِّحَّةُ وَالْفَرَاغُ",
+        terjemahan: "Dua nikmat yang ramai manusia sering lalai dan rugi padanya: nikmat kesihatan dan nikmat masa lapang.",
+        rujukan: "Sahih al-Bukhari (6412)",
+        pengajaran: "Gunakan 10 minit masa lapang hari ini untuk satu perkara yang membawa manfaat kepada masa depan awak."
+      },
+      {
+        arab: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+        terjemahan: "Sesungguhnya setiap amalan itu bergantung pada niatnya, dan sesungguhnya bagi setiap orang apa yang dia niatkan.",
+        rujukan: "Sahih al-Bukhari (1) & Sahih Muslim (1907)",
+        pengajaran: "Perbaharui niat sebelum bekerja atau mengurus rumah — kerja biasa pun menjadi ibadah bila niat kerana Allah."
+      },
+      {
+        arab: "احْرِصْ عَلَى مَا يَنْفَعُكَ، وَاسْتَعِنْ بِاللَّهِ وَلَا تَعْجَزْ",
+        terjemahan: "Bersungguh-sungguhlah terhadap perkara yang bermanfaat bagimu, mohonlah pertolongan kepada Allah, dan janganlah merasa lemah (berputus asa).",
+        rujukan: "Sahih Muslim (2664)",
+        pengajaran: "Bila rasa lemah nak mula, sebut 'La hawla wa la quwwata illa billah' dan mulakan langkah pertama."
+      },
+      {
+        arab: "إِذَا أَمْسَيْتَ فَلَا تَنْتَظِرِ الصَّبَاحَ، وَإِذَا أَصْبَحْتَ فَلَا تَنْتَظِرِ الْمَسَاءَ",
+        terjemahan: "Apabila kamu berada di waktu petang, janganlah menunggu waktu pagi; dan apabila kamu berada di waktu pagi, janganlah menunggu waktu petang.",
+        rujukan: "Sahih al-Bukhari (6416)",
+        pengajaran: "Elakkan tabiat 'nanti dululah'. Jika perkara itu boleh diselesaikan dalam 5 minit sekarang, terus buat."
+      },
+      {
+        arab: "يَسِّرُوا وَلَا تُعَسِّرُوا، وَبَشِّرُوا وَلَا تُنَفِّرُوا",
+        terjemahan: "Permudahkanlah dan jangan menyukarkan, berilah berita gembira dan jangan membuat orang menjauh.",
+        rujukan: "Sahih al-Bukhari (69) & Sahih Muslim (1734)",
+        pengajaran: "Permudahkan juga rutin harian awak sendiri. Jadual yang ringkas dan mudah diikuti lebih baik daripada jadual sempurna tetapi terbiar."
+      },
+      {
+        arab: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا، سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
+        terjemahan: "Sesiapa yang menempuh satu jalan untuk mencari ilmu, maka Allah akan mudahkan baginya jalan menuju ke syurga.",
+        rujukan: "Sahih Muslim (2699)",
+        pengajaran: "Luangkan sekurang-kurangnya 5 minit hari ini membaca atau belajar satu ilmu baharu yang berguna."
+      }
+    ];
+
+    const DOA_HARIAN = [
+      {
+        id: "d1",
+        pro: false,
+        tajuk: "Doa Berlindung daripada Lemah, Malas & Sedih",
+        arab: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
+        rumi: "Allahumma inni a'udzu bika minal-hammi wal-hazan, wal-'ajzi wal-kasal, wal-bukhli wal-jubn, wa dala'id-dayni wa ghalabatir-rijal.",
+        maksud: "Ya Allah, sesungguhnya aku berlindung kepada-Mu daripada rasa risau dan sedih, lemah dan malas, bakhil dan penakut, bebanan hutang serta tekanan manusia.",
+        rujukan: "Sahih al-Bukhari (6369)"
+      },
+      {
+        id: "d2",
+        pro: false,
+        tajuk: "Doa Dilapangkan Dada & Dipermudahkan Urusan",
+        arab: "رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي ۝ وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي ۝ يَفْقَهُوا قَوْلِي",
+        rumi: "Rabbish-rahli sadri, wa yassirli amri, wahlul 'uqdatan min lisani, yafqahu qawli.",
+        maksud: "Wahai Tuhanku, lapangkanlah bagiku dadaku, dan mudahkanlah bagiku urusanku, dan lepaskanlah simpulan dari lidahku supaya mereka faham perkataanku.",
+        rujukan: "Surah Taha (20:25-28)"
+      },
+      {
+        id: "d3",
+        pro: false,
+        tajuk: "Doa Pagi: Ilmu Bermanfaat, Rezeki Halal & Amalan Diterima",
+        arab: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",
+        rumi: "Allahumma inni as'aluka 'ilman nafi'an, wa rizqan tayyiban, wa 'amalan mutaqabbalan.",
+        maksud: "Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang baik (halal), dan amalan yang diterima.",
+        rujukan: "Sunan Ibn Majah (925) — Sahih"
+      },
+      {
+        id: "d4",
+        pro: true,
+        tajuk: "Doa Kebaikan Dunia & Akhirat",
+        arab: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        rumi: "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adzaban-nar.",
+        maksud: "Wahai Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka.",
+        rujukan: "Surah Al-Baqarah (2:201) & Sahih al-Bukhari (6389)"
+      },
+      {
+        id: "d5",
+        pro: true,
+        tajuk: "Doa Memohon Petunjuk, Ketakwaan & Kecukupan",
+        arab: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
+        rumi: "Allahumma inni as'alukal-huda wat-tuqa wal-'afafa wal-ghina.",
+        maksud: "Ya Allah, sesungguhnya aku memohon kepada-Mu petunjuk, ketakwaan, kehormatan diri (terpelihara daripada perkara haram), dan rasa cukup.",
+        rujukan: "Sahih Muslim (2721)"
+      },
+      {
+        id: "d6",
+        pro: true,
+        tajuk: "Doa Tetapkan Hati di Atas Ketaatan",
+        arab: "اللَّهُمَّ مُصَرِّفَ الْقُلُوبِ صَرِّفْ قُلُوبَنَا عَلَى طَاعَتِكَ",
+        rumi: "Allahumma musarrifal-qulub, sarrif qulubana 'ala ta'atik.",
+        maksud: "Ya Allah, Yang memalingkan hati-hati, palingkanlah hati kami kepada ketaatan terhadap-Mu.",
+        rujukan: "Sahih Muslim (2654)"
+      },
+      {
+        id: "d7",
+        pro: true,
+        tajuk: "Doa Ketika Menghadapi Urusan yang Terasa Sukar",
+        arab: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا، وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا",
+        rumi: "Allahumma la sahla illa ma ja'altahu sahla, wa anta taj'alul-hazna idza syi'ta sahla.",
+        maksud: "Ya Allah, tiada kemudahan melainkan apa yang Engkau jadikan mudah, dan Engkaulah yang menjadikan perkara sukar itu mudah apabila Engkau kehendaki.",
+        rujukan: "Sahih Ibn Hibban (974) — Sahih"
+      },
+      {
+        id: "d8",
+        pro: true,
+        tajuk: "Doa Penyerahan Diri Sebelum Tidur",
+        arab: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+        rumi: "Bismikallahumma amutu wa ahya.",
+        maksud: "Dengan nama-Mu ya Allah, aku mati (tidur) dan aku hidup (bangun kembali).",
+        rujukan: "Sahih al-Bukhari (6324)"
+      }
+    ];
+
+    const ZIKIR_PRESETS = [
+      { id: "istighfar", label: "Istighfar (Mohon Ampun)", arab: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ", maksud: "Aku memohon ampun kepada Allah Yang Maha Agung." },
+      { id: "subhanallah", label: "Subhanallah", arab: "سُبْحَانَ اللَّهِ", maksud: "Maha Suci Allah." },
+      { id: "alhamdulillah", label: "Alhamdulillah", arab: "الْحَمْدُ لِلَّهِ", maksud: "Segala puji bagi Allah." },
+      { id: "allahuakbar", label: "Allahu Akbar", arab: "اللَّهُ أَكْبَرُ", maksud: "Allah Maha Besar." },
+      { id: "tahlil", label: "La ilaha illallah", arab: "لَا إِلٰهَ إِلَّا اللَّهُ", maksud: "Tiada tuhan yang berhak disembah melainkan Allah." },
+      { id: "selawat", label: "Selawat Nabi SAW", arab: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ", maksud: "Ya Allah, limpahkanlah selawat ke atas Nabi Muhammad dan keluarga baginda." },
+      { id: "hauqalah", label: "Mohon Kekuatan (Hauqalah)", arab: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", maksud: "Tiada daya dan tiada kekuatan melainkan dengan pertolongan Allah." }
+    ];
+
+    const MICRO_STEPS = [
+      "Berdiri, minum segelas air masak, dan tarik nafas dalam 3 kali perlahan-lahan.",
+      "Kemaskan 1 ruang kecil di depan mata (meja, katil atau beg) selama 2 minit sahaja.",
+      "Buka tugasan pertama yang awak tangguh, dan tulis atau buat 1 langkah paling kecil tanpa fikir sempurna.",
+      "Letak telefon jauh sedikit dari tangan selama 2 minit dan tenangkan fikiran.",
+      "Ambil wuduk untuk segarkan wajah dan minda, kemudian duduk semula dengan tenang.",
+      "Tulis 1 perkara yang paling merisaukan awak sekarang supaya ia keluar dari kepala."
+    ];
+
+    const GENTLE_GREETINGS = [
+      "Tak mengapa kalau semalam rasa serabut atau terlepas. Hari ini hela nafas perlahan — kita mula dengan satu langkah paling kecil dulu.",
+      "Perubahan hidup bukan tentang menjadi sempurna hari ini, tetapi tentang kembali melangkah setiap kali terasa perlahan.",
+      "Awak tidak perlu selesaikan semua perkara hari ini. Cukup fokus 3 perkara penting dan serahkan selebihnya kepada Allah.",
+      "Langkah kecil yang dibuat dengan tenang hari ini jauh lebih bernilai daripada rancangan besar yang hanya tinggal di fikiran."
+    ];
+
+    const PRAYER_BLOCKS_META = [
+      { key: "subuh", title: "🌅 Subuh – Zohor", hint: "Fokus paling penting (tenaga pagi)", defaultPlan: "Siapkan 1 tugasan paling utama hari ini" },
+      { key: "zohor", title: "☀️ Zohor – Asar", hint: "Selesaikan urusan kerja / rezeki", defaultPlan: "Selesaikan urusan kerja & elak tangguh" },
+      { key: "asar", title: "🌤️ Asar – Maghrib", hint: "Keluarga, riadah & kemas diri", defaultPlan: "Luangkan masa tenang bersama keluarga / kemas rumah" },
+      { key: "maghrib", title: "🌙 Maghrib – Isyak", hint: "Ibadah, tenang & rancang esok", defaultPlan: "Solat tenang, baca 1 muka Al-Quran & muhasabah" }
+    ];
+
+    /* =========================================================================
+       PENGURUSAN STATE & LOCALSTORAGE
+       ========================================================================= */
+    function getTodayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }
+
+    function getDayOfYear() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      return Math.floor((now - start) / 86400000);
+    }
+
+    function defaultState() {
+      return {
+        isPro: false,
+        lastActiveDate: getTodayKey(),
+        daysActive: 1,
+        showRumi: true,
+        tasbihVibe: true,
+        tasbihSound: true,
+        tasbihPreset: "istighfar",
+        tasbihTarget: 33,
+        tasbihCurrent: 0,
+        tasbihTodayDate: getTodayKey(),
+        tasbihTodayCount: 0,
+        tasbihLifetime: 0,
+        todayTasksDate: getTodayKey(),
+        todayTasks: [],
+        prayerBlocksDate: getTodayKey(),
+        prayerBlocks: {
+          subuh: { text: PRAYER_BLOCKS_META[0].defaultPlan, done: false },
+          zohor: { text: PRAYER_BLOCKS_META[1].defaultPlan, done: false },
+          asar: { text: PRAYER_BLOCKS_META[2].defaultPlan, done: false },
+          maghrib: { text: PRAYER_BLOCKS_META[3].defaultPlan, done: false }
+        },
+        roadmap: {
+          ibadah: { weekly: "Jaga solat awal waktu & zikir pagi ringkas", q90: "Istiqamah baca Al-Quran sekurang-kurangnya 1 muka surat setiap hari", items: [] },
+          kerjaya: { weekly: "Siapkan tugasan utama tanpa tangguh 5 hari minggu ini", q90: "Bina rutin kerja tersusun & tingkatkan kemahiran utama", items: [] },
+          keluarga: { weekly: "Luangkan 15 minit tanpa telefon bersama keluarga setiap hari", q90: "Wujudkan suasana rumah yang lebih tenang, kemas & mesra", items: [] },
+          kesihatan: { weekly: "Tidur lebih awal & minum air mencukupi", q90: "Bersenam ringan 3 kali seminggu & kurangkan skrin waktu malam", items: [] }
+        },
+        muhasabahHistory: []
+      };
+    }
+
+    let state = loadState();
+    let quranIdx = getDayOfYear() % QURAN_DAILY.length;
+    let hadisIdx = getDayOfYear() % HADIS_SAHIH.length;
+    let currentPillar = "ibadah";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(APP_CONFIG.storageKey);
+        if (!raw) return defaultState();
+        const parsed = JSON.parse(raw);
+        const merged = { ...defaultState(), ...parsed };
+        const today = getTodayKey();
+
+        // Kira Hari Bangkit (tanpa menghukum jika terlepas)
+        if (merged.lastActiveDate !== today) {
+          merged.daysActive = (merged.daysActive || 1) + 1;
+          merged.lastActiveDate = today;
+        }
+        // Reset kaunter harian jika hari baru
+        if (merged.tasbihTodayDate !== today) {
+          merged.tasbihTodayDate = today;
+          merged.tasbihTodayCount = 0;
+        }
+        if (merged.todayTasksDate !== today) {
+          merged.todayTasksDate = today;
+          merged.todayTasks = [];
+        }
+        if (merged.prayerBlocksDate !== today) {
+          merged.prayerBlocksDate = today;
+          Object.keys(merged.prayerBlocks).forEach(k => {
+            merged.prayerBlocks[k].done = false;
+          });
+        }
+        return merged;
+      } catch (e) {
+        return defaultState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(APP_CONFIG.storageKey, JSON.stringify(state));
+      updateHeaderStats();
+    }
+
+    /* =========================================================================
+       AUDIO KLIK LEMBUT (WEB AUDIO API - 100% OFFLINE)
+       ========================================================================= */
+    let audioCtx = null;
+    function playSoftClick(freq = 520, duration = 0.045) {
+      if (!state.tasbihSound) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.remove("show"), 2400);
+    }
+
+    /* =========================================================================
+       NAVIGASI & MODAL
+       ========================================================================= */
+    function switchView(viewName, btnEl) {
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+      document.getElementById("view-" + viewName).classList.add("active");
+      document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+      if (id === "proModal") renderProModal();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+      if (id === "lazyModal") stopMicroTimer();
+    }
+
+    function closeModalOnBackdrop(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+
+    /* =========================================================================
+       FOKUS 3 PERKARA HARI INI
+       ========================================================================= */
+    function renderTodayTasks() {
+      const list = document.getElementById("todayTaskList");
+      const countBadge = document.getElementById("taskCountBadge");
+      const inputRow = document.getElementById("taskInputRow");
+      const limitMsg = document.getElementById("taskLimitMsg");
+
+      const doneCount = state.todayTasks.filter(t => t.done).length;
+      countBadge.textContent = `${doneCount} / ${Math.max(3, state.todayTasks.length)}`;
+
+      if (state.todayTasks.length === 0) {
+        list.innerHTML = `<div class="card-soft muted" style="text-align:center;">Belum ada tugasan hari ini. Tulis 1 perkara paling mudah dulu untuk mulakan momentum.</div>`;
+      } else {
+        list.innerHTML = state.todayTasks.map((t, i) => `
+          <div class="task-item ${t.done ? "done" : ""}">
+            <div class="check-circle" onclick="toggleTodayTask(${i})">${t.done ? "✓" : ""}</div>
+            <div class="task-text">${escapeHtml(t.text)}</div>
+            <div class="task-actions">
+              ${!t.done ? `<button class="icon-btn" title="Mula 5 minit" onclick="focusOnTask(${i})">⏱</button>` : ""}
+              <button class="icon-btn" title="Padam" onclick="deleteTodayTask(${i})">✕</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const atLimit = state.todayTasks.length >= 3;
+      inputRow.style.display = atLimit ? "none" : "flex";
+      limitMsg.style.display = atLimit ? "block" : "none";
+      updateHeaderStats();
+    }
+
+    function addTodayTask() {
+      const inp = document.getElementById("newTaskInput");
+      const val = inp.value.trim();
+      if (!val) return showToast("Tulis tugasan ringkas dahulu.");
+      if (state.todayTasks.length >= 3) return showToast("Cukup 3 fokus utama hari ini.");
+      state.todayTasks.push({ text: val, done: false });
+      inp.value = "";
+      saveState();
+      renderTodayTasks();
+      showToast("Bagus! Satu fokus sudah jelas.");
+    }
+
+    function toggleTodayTask(i) {
+      state.todayTasks[i].done = !state.todayTasks[i].done;
+      if (state.todayTasks[i].done) {
+        playSoftClick(660, 0.08);
+        showToast("Alhamdulillah, satu langkah kecil selesai!");
+      }
+      saveState();
+      renderTodayTasks();
+    }
+
+    function deleteTodayTask(i) {
+      state.todayTasks.splice(i, 1);
+      saveState();
+      renderTodayTasks();
+    }
+
+    function focusOnTask(i) {
+      const task = state.todayTasks[i];
+      document.getElementById("activeTimerTaskLabel").textContent = "Fokus sekarang: " + task.text;
+      selectTimerMinutes(5);
+      if (!timerRunning) toggleTimer();
+      showToast("Pemasa 5 minit dimulakan. Buat perlahan-lahan.");
+    }
+
+    /* =========================================================================
+       PEMASA FOKUS (5 / 15 / 25 MINIT)
+       ========================================================================= */
+    let timerSelectedMin = 5;
+    let timerSecondsLeft = 300;
+    let timerRunning = false;
+    let timerInterval = null;
+
+    function selectTimerMinutes(min) {
+      if (min > 5 && !state.isPro) {
+        openModal("proModal");
+        return showToast("Pemasa 15 & 25 minit tersedia dalam versi Pro.");
+      }
+      stopTimer();
+      timerSelectedMin = min;
+      timerSecondsLeft = min * 60;
+      document.querySelectorAll("[id^='preset-']").forEach(el => el.classList.remove("active"));
+      document.getElementById("preset-" + min).classList.add("active");
+      updateTimerDisplay();
+      document.getElementById("timerStatus").textContent = `Sedia untuk fokus ${min} minit dengan tenang.`;
+    }
+
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerSecondsLeft / 60)).padStart(2, "0");
+      const s = String(timerSecondsLeft % 60).padStart(2, "0");
+      document.getElementById("timerClock").textContent = `${m}:${s}`;
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        stopTimer();
+        document.getElementById("timerStatus").textContent = "Dijeda sebentar. Sambung bila sedia.";
+      } else {
+        timerRunning = true;
+        document.getElementById("timerStartBtn").textContent = "⏸ Jeda";
+        document.getElementById("timerStatus").textContent = "Fokus satu perkara sahaja sekarang...";
+        timerInterval = setInterval(() => {
+          timerSecondsLeft--;
+          updateTimerDisplay();
+          if (timerSecondsLeft <= 0) {
+            stopTimer();
+            playSoftClick(740, 0.25);
+            if (navigator.vibrate) navigator.vibrate([120, 80, 120]);
+            document.getElementById("timerStatus").textContent = "Alhamdulillah! Sesi fokus selesai. Rehat sekejap.";
+            showToast("Tahniah! Sesi fokus awak selesai.");
+          }
+        }, 1000);
+      }
+    }
+
+    function stopTimer() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      document.getElementById("timerStartBtn").textContent = "▶ Mula Fokus";
+    }
+
+    function resetTimer() {
+      stopTimer();
+      timerSecondsLeft = timerSelectedMin * 60;
+      updateTimerDisplay();
+      document.getElementById("timerStatus").textContent = "Sedia bila-bila masa awak rasa tenang.";
+    }
+
+    /* =========================================================================
+       MOD KECEMASAN: RASA MALAS (2 MINIT)
+       ========================================================================= */
+    let microSeconds = 120;
+    let microRunning = false;
+    let microInterval = null;
+
+    function openLazyRescue() {
+      pickRandomMicroStep();
+      stopMicroTimer();
+      microSeconds = 120;
+      updateMicroClock();
+      openModal("lazyModal");
+    }
+
+    function pickRandomMicroStep() {
+      const pick = MICRO_STEPS[Math.floor(Math.random() * MICRO_STEPS.length)];
+      document.getElementById("microStepText").textContent = pick;
+    }
+
+    function updateMicroClock() {
+      const m = String(Math.floor(microSeconds / 60)).padStart(2, "0");
+      const s = String(microSeconds % 60).padStart(2, "0");
+      document.getElementById("microClock").textContent = `${m}:${s}`;
+    }
+
+    function toggleMicroTimer() {
+      if (microRunning) {
+        stopMicroTimer();
+      } else {
+        microRunning = true;
+        document.getElementById("microStartBtn").textContent = "⏸ Jeda";
+        microInterval = setInterval(() => {
+          microSeconds--;
+          updateMicroClock();
+          if (microSeconds <= 0) {
+            stopMicroTimer();
+            playSoftClick(700, 0.2);
+            if (navigator.vibrate) navigator.vibrate([100, 60, 100]);
+            showToast("Syabas! Awak berjaya pecahkan rasa malas hari ini.");
+          }
+        }, 1000);
+      }
+    }
+
+    function stopMicroTimer() {
+      microRunning = false;
+      clearInterval(microInterval);
+      const btn = document.getElementById("microStartBtn");
+      if (btn) btn.textContent = "▶ Mula 2 Minit";
+    }
+
+    /* =========================================================================
+       BLOK MASA WAKTU SOLAT
+       ========================================================================= */
+    function renderPrayerBlocks() {
+      const box = document.getElementById("prayerBlocksContainer");
+      const tag = document.getElementById("prayerProTag");
+      tag.textContent = state.isPro ? "Aktif" : "⭐ Pro";
+
+      if (!state.isPro) {
+        // Papar 1 blok percuma sebagai pratonton + kunci selebihnya
+        const first = PRAYER_BLOCKS_META[0];
+        const b = state.prayerBlocks[first.key];
+        box.innerHTML = `
+          <div class="prayer-block ${b.done ? "done" : ""}">
+            <div class="prayer-head">
+              <div>
+                <div class="prayer-name">${first.title}</div>
+                <div class="prayer-hint">${first.hint}</div>
+              </div>
+              <button class="pill-btn ${b.done ? "pro-active" : ""}" onclick="togglePrayerBlock('${first.key}')">${b.done ? "✓ Selesai" : "Tanda"}</button>
+            </div>
+            <input type="text" value="${escapeHtml(b.text)}" onchange="updatePrayerText('${first.key}', this.value)" placeholder="Tulis fokus ringkas blok ini..." />
+          </div>
+          <div class="pro-lock-box">
+            <h4>🕌 Buka Penuh 4 Blok Masa Solat</h4>
+            <p>Susun hari dari Subuh, Zohor, Asar hingga Isyak supaya hidup terasa lebih berkat & tidak serabut.</p>
+            <button class="btn btn-gold btn-sm" onclick="openModal('proModal')">Buka Akses Pro</button>
+          </div>
+        `;
+        return;
+      }
+
+      box.innerHTML = PRAYER_BLOCKS_META.map(m => {
+        const b = state.prayerBlocks[m.key];
+        return `
+          <div class="prayer-block ${b.done ? "done" : ""}">
+            <div class="prayer-head">
+              <div>
+                <div class="prayer-name">${m.title}</div>
+                <div class="prayer-hint">${m.hint}</div>
+              </div>
+              <button class="pill-btn ${b.done ? "pro-active" : ""}" onclick="togglePrayerBlock('${m.key}')">${b.done ? "✓ Selesai" : "Tanda"}</button>
+            </div>
+            <input type="text" value="${escapeHtml(b.text)}" onchange="updatePrayerText('${m.key}', this.value)" placeholder="Tulis fokus ringkas blok ini..." />
+          </div>
+        `;
+      }).join("");
+    }
+
+    function togglePrayerBlock(key) {
+      state.prayerBlocks[key].done = !state.prayerBlocks[key].done;
+      if (state.prayerBlocks[key].done) playSoftClick(640, 0.08);
+      saveState();
+      renderPrayerBlocks();
+    }
+
+    function updatePrayerText(key, val) {
+      state.prayerBlocks[key].text = val.trim();
+      saveState();
+      showToast("Blok masa solat dikemas kini.");
+    }
+
+    /* =========================================================================
+       ROHANI HARIAN (QURAN, HADIS SAHIH & DOA)
+       ========================================================================= */
+    function switchRohaniTab(tab, btn) {
+      ["quran", "hadis", "doa"].forEach(t => {
+        document.getElementById("rohani-" + t).style.display = t === tab ? "block" : "none";
+      });
+      document.querySelectorAll(".sub-tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    function renderQuran() {
+      const q = QURAN_DAILY[quranIdx];
+      document.getElementById("quranIndexTag").textContent = `${quranIdx + 1} / ${QURAN_DAILY.length}`;
+      document.getElementById("quranContent").innerHTML = `
+        <div class="arabic-text">${q.arab}</div>
+        <p class="meaning-text">"${q.terjemahan}"</p>
+        <div class="source-text"><span>📌 ${q.rujukan}</span></div>
+        <div class="action-box"><strong>Tindakan Kecil Hari Ini:</strong> ${q.tindakan}</div>
+      `;
+    }
+
+    function stepQuran(dir) {
+      quranIdx = (quranIdx + dir + QURAN_DAILY.length) % QURAN_DAILY.length;
+      renderQuran();
+    }
+
+    function renderHadis() {
+      const h = HADIS_SAHIH[hadisIdx];
+      document.getElementById("hadisIndexTag").textContent = `${hadisIdx + 1} / ${HADIS_SAHIH.length}`;
+      document.getElementById("hadisContent").innerHTML = `
+        <div class="arabic-text">${h.arab}</div>
+        <p class="meaning-text">"${h.terjemahan}"</p>
+        <div class="source-text"><span class="tag">✓ Sahih</span><span>${h.rujukan}</span></div>
+        <div class="action-box"><strong>Pengajaran Praktikal:</strong> ${h.pengajaran}</div>
+      `;
+    }
+
+    function stepHadis(dir) {
+      hadisIdx = (hadisIdx + dir + HADIS_SAHIH.length) % HADIS_SAHIH.length;
+      renderHadis();
+    }
+
+    function renderDoaList() {
+      const container = document.getElementById("doaListContainer");
+      document.getElementById("rumiToggleBtn").textContent = `Rumi: ${state.showRumi ? "Hidup" : "Tutup"}`;
+
+      const unlocked = DOA_HARIAN.filter(d => !d.pro || state.isPro);
+      const lockedCount = DOA_HARIAN.length - unlocked.length;
+
+      let html = unlocked.map(d => `
+        <div class="doa-card">
+          <div class="doa-title">
+            <span>${d.tajuk}</span>
+          </div>
+          <div class="arabic-text">${d.arab}</div>
+          ${state.showRumi ? `<div class="rumi-text">${d.rumi}</div>` : ""}
+          <p class="meaning-text">${d.maksud}</p>
+          <div class="source-text"><span>📌 ${d.rujukan}</span></div>
+        </div>
+      `).join("");
+
+      if (lockedCount > 0) {
+        html += `
+          <div class="pro-lock-box">
+            <h4>🤲 +${lockedCount} Lagi Doa Sahih Harian (Pro)</h4>
+            <p>Termasuk Doa Ketenangan Hati, Doa Urusan Sukar, Doa Petunjuk & Kecukupan Diri serta Doa Sebelum Tidur.</p>
+            <button class="btn btn-gold btn-sm" onclick="openModal('proModal')">Buka Semua Doa</button>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+    }
+
+    function toggleRumi() {
+      state.showRumi = !state.showRumi;
+      saveState();
+      renderDoaList();
+    }
+
+    /* =========================================================================
+       TASBIH DIGITAL
+       ========================================================================= */
+    function initTasbihSelect() {
+      const sel = document.getElementById("zikirSelect");
+      sel.innerHTML = ZIKIR_PRESETS.map(z => `<option value="${z.id}">${z.label}</option>`).join("");
+      sel.value = state.tasbihPreset;
+      renderTasbih();
+    }
+
+    function changeZikirPreset() {
+      state.tasbihPreset = document.getElementById("zikirSelect").value;
+      state.tasbihCurrent = 0;
+      saveState();
+      renderTasbih();
+    }
+
+    function setTasbihTarget(val) {
+      state.tasbihTarget = val;
+      document.querySelectorAll("[id^='target-']").forEach(b => b.classList.remove("active"));
+      document.getElementById("target-" + val).classList.add("active");
+      saveState();
+      renderTasbih();
+    }
+
+    function renderTasbih() {
+      const z = ZIKIR_PRESETS.find(item => item.id === state.tasbihPreset) || ZIKIR_PRESETS[0];
+      document.getElementById("zikirArabicDisplay").textContent = z.arab;
+      document.getElementById("zikirMeaningDisplay").textContent = `"${z.maksud}"`;
+      document.getElementById("tasbihCount").textContent = state.tasbihCurrent;
+      document.getElementById("tasbihTotalLifetime").textContent = state.tasbihLifetime;
+      document.getElementById("tasbihTargetLabel").textContent = state.tasbihTarget > 0 ? `Sasaran: ${state.tasbihTarget}` : "Mod Bebas";
+      document.getElementById("vibeToggleBtn").textContent = `📳 Getar: ${state.tasbihVibe ? "Ya" : "Tidak"}`;
+      document.getElementById("soundToggleBtn").textContent = `🔊 Bunyi: ${state.tasbihSound ? "Ya" : "Tidak"}`;
+
+      document.querySelectorAll("[id^='target-']").forEach(b => b.classList.remove("active"));
+      const activeTargetBtn = document.getElementById("target-" + state.tasbihTarget);
+      if (activeTargetBtn) activeTargetBtn.classList.add("active");
+
+      // SVG progress ring
+      const circumference = 2 * Math.PI * 102;
+      const circle = document.getElementById("tasbihProgressCircle");
+      if (state.tasbihTarget > 0) {
+        const ratio = Math.min(1, state.tasbihCurrent / state.tasbihTarget);
+        circle.style.strokeDashoffset = circumference * (1 - ratio);
+      } else {
+        circle.style.strokeDashoffset = circumference * (1 - ((state.tasbihCurrent % 33) / 33));
+      }
+    }
+
+    function tapTasbih() {
+      state.tasbihCurrent += 1;
+      state.tasbihTodayCount += 1;
+      state.tasbihLifetime += 1;
+
+      if (state.tasbihVibe && navigator.vibrate) navigator.vibrate(18);
+      playSoftClick(480, 0.035);
+
+      if (state.tasbihTarget > 0 && state.tasbihCurrent === state.tasbihTarget) {
+        if (state.tasbihVibe && navigator.vibrate) navigator.vibrate([80, 60, 120]);
+        playSoftClick(760, 0.16);
+        showToast(`Alhamdulillah! Sasaran ${state.tasbihTarget} zikir tercapai.`);
+      }
+      saveState();
+      renderTasbih();
+    }
+
+    function resetTasbihCurrent() {
+      state.tasbihCurrent = 0;
+      saveState();
+      renderTasbih();
+      showToast("Kiraan semasa ditetapkan semula.");
+    }
+
+    function toggleVibe() {
+      state.tasbihVibe = !state.tasbihVibe;
+      saveState();
+      renderTasbih();
+    }
+
+    function toggleSound() {
+      state.tasbihSound = !state.tasbihSound;
+      saveState();
+      renderTasbih();
+    }
+
+    /* =========================================================================
+       PELAN HIDUP (ROADMAP)
+       ========================================================================= */
+    function selectPillar(pillar, btn) {
+      currentPillar = pillar;
+      document.querySelectorAll(".pillar-tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderRoadmap();
+    }
+
+    function renderRoadmap() {
+      const container = document.getElementById("roadmapContent");
+      document.getElementById("roadmapProTag").textContent = state.isPro ? "Aktif" : "⭐ Pro";
+
+      if (!state.isPro && currentPillar !== "ibadah") {
+        container.innerHTML = `
+          <div class="pro-lock-box">
+            <h4>🗺️ Pelan Hidup Lengkap (4 Tiang Utama)</h4>
+            <p>Versi Percuma membuka tiang <strong>Ibadah</strong>. Naik taraf Pro untuk simpan Pelan Mingguan & 90 Hari bagi Kerjaya, Keluarga & Kesihatan.</p>
+            <button class="btn btn-gold btn-sm" onclick="openModal('proModal')">Buka Akses Pro</button>
+          </div>
+        `;
+        return;
+      }
+
+      const data = state.roadmap[currentPillar];
+      container.innerHTML = `
+        <div class="card-soft mb-8">
+          <label class="muted" style="display:block; margin-bottom:5px; font-weight:700; color:var(--primary);">Fokus Minggu Ini</label>
+          <textarea onchange="saveRoadmapField('weekly', this.value)" placeholder="1 perkara kecil yang mahu dibina minggu ini...">${escapeHtml(data.weekly)}</textarea>
+        </div>
+
+        <div class="card-soft mb-8">
+          <label class="muted" style="display:block; margin-bottom:5px; font-weight:700; color:var(--gold);">Sasaran 90 Hari (3 Bulan)</label>
+          <textarea onchange="saveRoadmapField('q90', this.value)" placeholder="Gambaran hidup yang lebih tenang 3 bulan dari sekarang...">${escapeHtml(data.q90)}</textarea>
+        </div>
+
+        <div class="card-soft">
+          <div class="flex-between mb-8">
+            <strong style="font-size:0.84rem;">Langkah Kecil Pilihan</strong>
+          </div>
+          <div class="task-list">
+            ${data.items.length === 0 ? `<p class="muted">Tambah langkah kecil supaya pelan ini terus boleh dibuat.</p>` : data.items.map((it, idx) => `
+              <div class="task-item ${it.done ? "done" : ""}">
+                <div class="check-circle" onclick="toggleRoadmapItem(${idx})">${it.done ? "✓" : ""}</div>
+                <div class="task-text">${escapeHtml(it.text)}</div>
+                <button class="icon-btn" onclick="deleteRoadmapItem(${idx})">✕</button>
+              </div>
+            `).join("")}
+          </div>
+          <div class="add-row">
+            <input type="text" id="roadmapItemInput" placeholder="Tambah langkah kecil..." maxlength="80" />
+            <button class="btn btn-primary btn-sm" onclick="addRoadmapItem()">Tambah</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveRoadmapField(field, val) {
+      state.roadmap[currentPillar][field] = val.trim();
+      saveState();
+      showToast("Pelan hidup disimpan.");
+    }
+
+    function addRoadmapItem() {
+      const inp = document.getElementById("roadmapItemInput");
+      const val = inp.value.trim();
+      if (!val) return;
+      state.roadmap[currentPillar].items.push({ text: val, done: false });
+      inp.value = "";
+      saveState();
+      renderRoadmap();
+    }
+
+    function toggleRoadmapItem(idx) {
+      state.roadmap[currentPillar].items[idx].done = !state.roadmap[currentPillar].items[idx].done;
+      saveState();
+      renderRoadmap();
+    }
+
+    function deleteRoadmapItem(idx) {
+      state.roadmap[currentPillar].items.splice(idx, 1);
+      saveState();
+      renderRoadmap();
+    }
+
+    /* =========================================================================
+       MUHASABAH 30 SAAT
+       ========================================================================= */
+    function saveMuhasabah() {
+      const win = document.getElementById("muhWin").value.trim();
+      const imp = document.getElementById("muhImprove").value.trim();
+      if (!win && !imp) return showToast("Tulis sekurang-kurangnya satu catatan ringkas.");
+
+      const entry = {
+        date: new Date().toLocaleDateString("ms-MY", { weekday: "short", day: "numeric", month: "short", year: "numeric" }),
+        win: win || "-",
+        improve: imp || "-"
+      };
+      state.muhasabahHistory.unshift(entry);
+      document.getElementById("muhWin").value = "";
+      document.getElementById("muhImprove").value = "";
+      saveState();
+      renderMuhasabahHistory();
+      showToast("Alhamdulillah. Rehatlah dengan hati yang lapang malam ini.");
+    }
+
+    function renderMuhasabahHistory() {
+      const box = document.getElementById("muhasabahHistoryList");
+      document.getElementById("historyProTag").textContent = state.isPro ? "Penuh" : "⭐ Pro";
+
+      if (state.muhasabahHistory.length === 0) {
+        box.innerHTML = `<p class="muted">Belum ada catatan muhasabah. Mulakan malam ini — 30 saat sahaja.</p>`;
+        return;
+      }
+
+      const listToShow = state.isPro ? state.muhasabahHistory : state.muhasabahHistory.slice(0, 2);
+      let html = listToShow.map(item => `
+        <div class="history-item">
+          <div class="history-date">🌙 ${escapeHtml(item.date)}</div>
+          <div><strong>Kejayaan kecil:</strong> ${escapeHtml(item.win)}</div>
+          <div class="muted" style="margin-top:3px;"><strong>Baiki esok:</strong> ${escapeHtml(item.improve)}</div>
+        </div>
+      `).join("");
+
+      if (!state.isPro && state.muhasabahHistory.length > 2) {
+        html += `
+          <div class="pro-lock-box mt-8">
+            <h4>📓 Arkib Penuh Muhasabah (${state.muhasabahHistory.length} catatan)</h4>
+            <p>Buka versi Pro untuk melihat semula semua perjalanan perubahan diri awak.</p>
+            <button class="btn btn-gold btn-sm" onclick="openModal('proModal')">Buka Arkib Penuh</button>
+          </div>
+        `;
+      }
+      box.innerHTML = html;
+    }
+
+    /* =========================================================================
+       SISTEM PRO & BACKUP JSON
+       ========================================================================= */
+    function renderProModal() {
+      document.getElementById("paymentLinkBtn").href = APP_CONFIG.paymentUrl;
+      document.getElementById("proUnlockedNotice").style.display = state.isPro ? "block" : "none";
+      document.getElementById("proPurchaseArea").style.display = state.isPro ? "none" : "block";
+    }
+
+    function activateProCode() {
+      const code = document.getElementById("proCodeInput").value.trim().toUpperCase();
+      if (!code) return showToast("Sila masukkan kod akses Pro.");
+      if (APP_CONFIG.validProCodes.includes(code)) {
+        state.isPro = true;
+        saveState();
+        renderAll();
+        renderProModal();
+        playSoftClick(780, 0.2);
+        showToast("🎉 Tahniah! Versi Pro berjaya diaktifkan.");
+      } else {
+        showToast("Kod tidak sah. Semak semula ejaan kod anda.");
+      }
+    }
+
+    function exportDataJSON() {
+      if (!state.isPro) {
+        closeModal("settingsModal");
+        openModal("proModal");
+        return showToast("Fungsi Backup JSON tersedia untuk ahli Pro.");
+      }
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `LangkahBaru_Backup_${getTodayKey()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Fail backup berjaya dimuat turun.");
+    }
+
+    function importDataJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          state = { ...defaultState(), ...parsed };
+          saveState();
+          renderAll();
+          closeModal("settingsModal");
+          showToast("Data backup berjaya dipulihkan!");
+        } catch (err) {
+          showToast("Fail backup tidak sah.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetAllData() {
+      if (!confirm("Pasti mahu padam semua data dan mula semula?")) return;
+      localStorage.removeItem(APP_CONFIG.storageKey);
+      state = defaultState();
+      saveState();
+      renderAll();
+      closeModal("settingsModal");
+      showToast("Semua data telah ditetapkan semula.");
+    }
+
+    /* =========================================================================
+       UTILITY & INITIALIZATION
+       ========================================================================= */
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function updateHeaderStats() {
+      document.getElementById("statStreak").textContent = state.daysActive;
+      const done = state.todayTasks.filter(t => t.done).length;
+      document.getElementById("statTasksDone").textContent = `${done}/3`;
+      document.getElementById("statZikirToday").textContent = state.tasbihTodayCount;
+
+      const proBtn = document.getElementById("proStatusBtn");
+      if (state.isPro) {
+        proBtn.textContent = "✓ Pro";
+        proBtn.classList.remove("pro-badge");
+        proBtn.classList.add("pro-active");
+      } else {
+        proBtn.textContent = "⭐ Pro";
+        proBtn.classList.add("pro-badge");
+        proBtn.classList.remove("pro-active");
+      }
+    }
+
+    function renderAll() {
+      const todayLabel = new Date().toLocaleDateString("ms-MY", { weekday: "long", day: "numeric", month: "long" });
+      document.getElementById("todayDateLabel").textContent = todayLabel;
+      document.getElementById("gentleGreeting").textContent = GENTLE_GREETINGS[getDayOfYear() % GENTLE_GREETINGS.length];
+
+      updateHeaderStats();
+      renderTodayTasks();
+      renderPrayerBlocks();
+      renderQuran();
+      renderHadis();
+      renderDoaList();
+      initTasbihSelect();
+      renderRoadmap();
+      renderMuhasabahHistory();
+    }
+
+    // Enter key support for task input
+    document.getElementById("newTaskInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") addTodayTask();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
